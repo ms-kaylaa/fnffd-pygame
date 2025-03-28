@@ -1,0 +1,86 @@
+{
+    "spritesheet": "cyan",
+    
+    "animations": 
+    {
+        "idle":
+        {
+            "xml_name": "cyan idle",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        
+        "singLEFT":
+        {
+            "xml_name": "cyan left",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singDOWN":
+        {
+            "xml_name": "cyan down",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singUP":
+        {
+            "xml_name": "cyan up",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singRIGHT":
+        {
+            "xml_name": "cyan right",
+            "offsets": [0, 0],
+            "indices": []
+        },
+
+        "singLEFT-alt":
+        {
+            "xml_name": "cyan left alt",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singDOWN-alt":
+        {
+            "xml_name": "cyan down alt",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singUP-alt":
+        {
+            "xml_name": "cyan up alt",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singRIGHT-alt":
+        {
+            "xml_name": "cyan right alt",
+            "offsets": [0, 0],
+            "indices": []
+        },
+
+        "ayy":
+        {
+            "xml_name": "cyan ayy",
+            "offsets": [0, 0],
+            "indices": []
+        },
+
+        "snore up":
+        {
+            "xml_name": "cyan snore up",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "snore down":
+        {
+            "xml_name": "cyan snore down",
+            "offsets": [0, 0],
+            "indices": []
+        }
+    },
+
+    "ayy_sound": "dude_ayy",
+    "scale": 1
+}

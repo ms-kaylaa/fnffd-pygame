@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="notes_funny.png" width="183" height="156">
+	<SubTexture name="ui left0000" x="5" y="107" width="44" height="44" frameX="-0" frameY="-1" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="ui down0000" x="72" y="5" width="39" height="48" frameX="-2" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="ui up0000" x="52" y="107" width="36" height="42" frameX="-3" frameY="-2" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="ui right0000" x="130" y="47" width="39" height="39" frameX="-2" frameY="-5" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="cap left0000" x="156" y="17" width="22" height="9" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="cap down0000" x="156" y="5" width="22" height="9" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="cap up0000" x="127" y="89" width="22" height="9" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="cap right0000" x="156" y="29" width="22" height="9" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="left0000" x="80" y="56" width="44" height="44" frameX="-0" frameY="-1" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="down0000" x="5" y="5" width="39" height="48" frameX="-2" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="up0000" x="91" y="103" width="36" height="42" frameX="-3" frameY="-2" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="right0000" x="114" y="5" width="39" height="39" frameX="-2" frameY="-5" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold left0000" x="5" y="56" width="22" height="48" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold down0000" x="47" y="5" width="22" height="48" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold up0000" x="55" y="56" width="22" height="48" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold right0000" x="30" y="56" width="22" height="48" frameX="-11" frameY="-0" frameWidth="44" frameHeight="48"/>
+</TextureAtlas>

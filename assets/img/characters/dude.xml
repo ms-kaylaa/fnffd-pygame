@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="dude.png" width="973" height="929">
+	<SubTexture name="dude ayy0000" x="437" y="620" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0001" x="790" y="326" width="95" height="109" frameX="-0" frameY="-1" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0002" x="782" y="651" width="95" height="109" frameX="-0" frameY="-1" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0003" x="535" y="695" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0004" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0005" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0006" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0007" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0008" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy0009" x="760" y="213" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude ayy suck0000" x="207" y="642" width="95" height="110" frameX="-0" frameY="-0" frameWidth="99" frameHeight="114"/>
+	<SubTexture name="dude dance down0000" x="5" y="5" width="137" height="116" frameX="-0" frameY="-0" frameWidth="141" frameHeight="120"/>
+	<SubTexture name="dude dance down0001" x="5" y="5" width="137" height="116" frameX="-0" frameY="-0" frameWidth="141" frameHeight="120"/>
+	<SubTexture name="dude dance down0002" x="5" y="5" width="137" height="116" frameX="-0" frameY="-0" frameWidth="141" frameHeight="120"/>
+	<SubTexture name="dude dance down0003" x="5" y="5" width="137" height="116" frameX="-0" frameY="-0" frameWidth="141" frameHeight="120"/>
+	<SubTexture name="dude dance up0000" x="5" y="124" width="137" height="114" frameX="-0" frameY="-0" frameWidth="141" frameHeight="118"/>
+	<SubTexture name="dude dance up0001" x="5" y="124" width="137" height="114" frameX="-0" frameY="-0" frameWidth="141" frameHeight="118"/>
+	<SubTexture name="dude dance up0002" x="5" y="124" width="137" height="114" frameX="-0" frameY="-0" frameWidth="141" frameHeight="118"/>
+	<SubTexture name="dude dance up0003" x="5" y="124" width="137" height="114" frameX="-0" frameY="-0" frameWidth="141" frameHeight="118"/>
+	<SubTexture name="dude down0000" x="569" y="5" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0001" x="337" y="409" width="117" height="99" frameX="-0" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0002" x="337" y="511" width="115" height="99" frameX="-1" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0003" x="455" y="518" width="114" height="99" frameX="-1" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0004" x="5" y="509" width="114" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0005" x="569" y="372" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0006" x="569" y="372" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0007" x="569" y="372" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0008" x="569" y="372" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down0009" x="569" y="372" width="113" height="99" frameX="-2" frameY="-0" frameWidth="121" frameHeight="103"/>
+	<SubTexture name="dude down alt0000" x="572" y="585" width="100" height="107" frameX="-1" frameY="-4" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0001" x="655" y="223" width="102" height="107" frameX="-0" frameY="-4" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0002" x="685" y="333" width="102" height="106" frameX="-0" frameY="-5" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0003" x="572" y="474" width="100" height="108" frameX="-1" frameY="-4" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0004" x="106" y="621" width="98" height="107" frameX="-2" frameY="-5" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0005" x="5" y="611" width="98" height="108" frameX="-2" frameY="-4" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down alt0006" x="5" y="611" width="98" height="108" frameX="-2" frameY="-4" frameWidth="106" frameHeight="116"/>
+	<SubTexture name="dude down miss0000" x="122" y="519" width="113" height="99" frameX="-1" frameY="-1" frameWidth="119" frameHeight="104"/>
+	<SubTexture name="dude down miss0001" x="122" y="519" width="113" height="99" frameX="-2" frameY="-0" frameWidth="119" frameHeight="104"/>
+	<SubTexture name="dude down miss0002" x="122" y="519" width="113" height="99" frameX="-2" frameY="-0" frameWidth="119" frameHeight="104"/>
+	<SubTexture name="dude idle0000" x="329" y="613" width="105" height="100" frameX="-1" frameY="-3" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0001" x="675" y="651" width="104" height="102" frameX="-2" frameY="-1" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0002" x="675" y="547" width="106" height="101" frameX="-0" frameY="-2" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0003" x="685" y="442" width="106" height="102" frameX="-0" frameY="-1" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0004" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0005" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0006" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0007" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0008" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0009" x="676" y="107" width="105" height="103" frameX="-1" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude idle0010" x="676" y="107" width="105" height="103" frameX="-0" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="dude left0000" x="858" y="127" width="89" height="94" frameX="-0" frameY="-1" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0001" x="880" y="559" width="88" height="94" frameX="-0" frameY="-1" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0002" x="685" y="5" width="89" height="95" frameX="-0" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0003" x="269" y="829" width="89" height="95" frameX="-0" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left alt0000" x="784" y="5" width="85" height="119" frameX="-7" frameY="-4" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0001" x="5" y="722" width="84" height="116" frameX="-3" frameY="-7" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0002" x="794" y="438" width="87" height="118" frameX="-4" frameY="-5" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0003" x="256" y="5" width="89" height="120" frameX="-5" frameY="-3" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0004" x="238" y="519" width="88" height="120" frameX="-6" frameY="-3" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0005" x="238" y="519" width="88" height="120" frameX="-6" frameY="-3" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0006" x="238" y="519" width="88" height="120" frameX="-6" frameY="-3" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left alt0007" x="238" y="519" width="88" height="120" frameX="-6" frameY="-3" frameWidth="98" frameHeight="127"/>
+	<SubTexture name="dude left miss0000" x="815" y="763" width="88" height="94" frameX="-0" frameY="-2" frameWidth="93" frameHeight="100"/>
+	<SubTexture name="dude left miss0001" x="858" y="224" width="88" height="95" frameX="-1" frameY="-1" frameWidth="93" frameHeight="100"/>
+	<SubTexture name="dude right0000" x="112" y="399" width="110" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0001" x="564" y="115" width="109" height="105" frameX="-2" frameY="-2" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0002" x="457" y="409" width="109" height="106" frameX="-1" frameY="-1" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0003" x="542" y="264" width="110" height="105" frameX="-0" frameY="-2" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0004" x="457" y="5" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0005" x="225" y="409" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0006" x="225" y="409" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0007" x="225" y="409" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0008" x="225" y="409" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right0009" x="225" y="409" width="109" height="107" frameX="-0" frameY="-0" frameWidth="115" frameHeight="111"/>
+	<SubTexture name="dude right alt0000" x="113" y="279" width="104" height="117" frameX="-0" frameY="-0" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0001" x="456" y="147" width="105" height="114" frameX="-0" frameY="-3" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0002" x="5" y="241" width="105" height="116" frameX="-2" frameY="-1" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0003" x="220" y="280" width="105" height="115" frameX="-1" frameY="-2" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0004" x="328" y="290" width="104" height="116" frameX="-1" frameY="-1" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0005" x="435" y="290" width="104" height="116" frameX="-1" frameY="-1" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0006" x="5" y="360" width="104" height="117" frameX="-1" frameY="-0" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0007" x="5" y="360" width="104" height="117" frameX="-1" frameY="-0" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude right alt0008" x="5" y="360" width="104" height="117" frameX="-1" frameY="-0" frameWidth="111" frameHeight="121"/>
+	<SubTexture name="dude up0000" x="395" y="733" width="85" height="111" frameX="-1" frameY="-3" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0001" x="92" y="731" width="85" height="114" frameX="-1" frameY="-0" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0002" x="483" y="808" width="85" height="111" frameX="-1" frameY="-3" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0003" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0004" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0005" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0006" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0007" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0008" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up0009" x="305" y="716" width="87" height="110" frameX="-0" frameY="-4" frameWidth="91" frameHeight="118"/>
+	<SubTexture name="dude up alt0000" x="355" y="147" width="98" height="140" frameX="-1" frameY="-0" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0001" x="145" y="5" width="108" height="132" frameX="-3" frameY="-8" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0002" x="145" y="140" width="103" height="136" frameX="-1" frameY="-3" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0003" x="251" y="140" width="101" height="137" frameX="-0" frameY="-3" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0004" x="355" y="5" width="99" height="139" frameX="-0" frameY="-1" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0005" x="355" y="147" width="98" height="140" frameX="-1" frameY="-0" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0006" x="355" y="147" width="98" height="140" frameX="-1" frameY="-0" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up alt0007" x="355" y="147" width="98" height="140" frameX="-1" frameY="-0" frameWidth="115" frameHeight="144"/>
+	<SubTexture name="dude up miss0000" x="180" y="755" width="86" height="110" frameX="-1" frameY="-2" frameWidth="92" frameHeight="116"/>
+	<SubTexture name="dude up miss0001" x="633" y="756" width="87" height="110" frameX="-1" frameY="-1" frameWidth="92" frameHeight="116"/>
+	<SubTexture name="dude up miss0002" x="633" y="756" width="87" height="110" frameX="-1" frameY="-1" frameWidth="92" frameHeight="116"/>
+	<SubTexture name="dude left0004" x="723" y="763" width="89" height="95" frameX="-1" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0005" x="872" y="5" width="88" height="95" frameX="-1" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0006" x="872" y="5" width="88" height="95" frameX="-1" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0007" x="872" y="5" width="88" height="95" frameX="-1" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0008" x="872" y="5" width="88" height="95" frameX="-1" frameY="-0" frameWidth="90" frameHeight="95"/>
+	<SubTexture name="dude left0009" x="858" y="127" width="89" height="94" frameX="-0" frameY="-1" frameWidth="90" frameHeight="95"/>
+</TextureAtlas>

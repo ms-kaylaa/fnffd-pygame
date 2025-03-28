@@ -1,0 +1,55 @@
+{
+    "spritesheet": "dude",
+    
+    "animations": 
+    {
+        "idle":
+        {
+            "xml_name": "dude idle",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singLEFT":
+        {
+            "xml_name": "dude left",
+            "offsets": [-11, 5],
+            "indices": []
+        },
+        "singDOWN":
+        {
+            "xml_name": "dude down",
+            "offsets": [-16, 1],
+            "indices": []
+        },
+        "singUP":
+        {
+            "xml_name": "dude up",
+            "offsets": [-15, -11],
+            "indices": []
+        },
+        "singRIGHT":
+        {
+            "xml_name": "dude right",
+            "offsets": [-11, -5],
+            "indices": []
+        },
+
+        "ayy":
+        {
+            "xml_name": "dude ayy",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "ayy suck":
+        {
+            "xml_name": "dude ayy suck",
+            "offsets": [0, 0],
+            "indices": []
+        }
+    },
+
+    "ayy_sound": "dude_ayy",
+    "ayysuck_sound": "dude_ayysuck",
+    
+    "scale": 1
+}
