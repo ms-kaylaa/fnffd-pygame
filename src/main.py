@@ -221,6 +221,8 @@ def main():
                 bar.flow = awesome_util.clamp(bar.flow + 0.01, 0, 1)
                 bar.skill = awesome_util.clamp(bar.skill - 1, 0, 100)
 
+                bar.coolscore += 100
+
                 # cool camera shift thing
                 match note.dir_int:
                     case 0:
@@ -241,6 +243,7 @@ def main():
         if not hit_note:
             bar.flow = 0
             bar.skill = awesome_util.clamp(bar.skill + 5, 0, 100)
+            bar.misses+=1
 
     def check_hold_note(id, anim):
         for note in player_notes:
@@ -250,6 +253,8 @@ def main():
                 hit_note = True
                 bar.flow = awesome_util.clamp(bar.flow + 0.01, 0, 1)
                 bar.skill = awesome_util.clamp(bar.skill - 1, 0, 100)
+
+                bar.coolscore+=25
 
                 dude.play_animation(anim)
                 break
@@ -305,6 +310,7 @@ def main():
                 event_num += 1
 
             # custom video notetype (thanks for custom notetypes hexose)
+            # no problem - hexose
             case 13:
                 print("starting video")
                 video_start_time = pygame.mixer.music.get_pos() / 1000

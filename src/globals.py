@@ -21,7 +21,7 @@ screen_shader = pygame_shaders.DefaultScreenShader(screen)
 clock = pygame.time.Clock()
 
 # -= probably-often reused variables -= #
-small_font = pygame.font.SysFont("Comic Sans MS", 16)
+small_font = pygame.font.Font("assets/fnt/fnt-comic1.ttf", 14)
 
 # -= DIRECTORIES =- #
 
@@ -32,6 +32,7 @@ IMG_DIRECTORY = ASSETS_DIRECTORY + "img/" # images
 SND_DIRECTORY = ASSETS_DIRECTORY + "snd/" # sounds
 MUS_DIRECTORY = ASSETS_DIRECTORY + "mus/" # music
 VID_DIRECTORY = ASSETS_DIRECTORY + "vid/" # videos
+FNT_DIRECTORY = ASSETS_DIRECTORY + "fnt/" # fonts
 
 # data directories (plaintext files/data structures)
 DATA_DIRECTORY = ASSETS_DIRECTORY + "data/"

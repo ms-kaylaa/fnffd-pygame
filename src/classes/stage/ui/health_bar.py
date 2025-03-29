@@ -22,6 +22,9 @@ class HealthBar(BasicSprite):
         self._last_skill = 0
         self._last_flow = 0
         
+        self.coolscore = 0
+        self.misses = 0
+
         self.base_image = pygame.Surface((WINDOW_WIDTH//2, WINDOW_HEIGHT//2), pygame.SRCALPHA).convert_alpha() # TODO: base_image = bar frame, moving stuff is drawn/blitted on top
         self.rect = self.base_image.get_rect()
 
@@ -43,8 +46,8 @@ class HealthBar(BasicSprite):
         self.sinny = round(math.sin((self.current_time*FPS)/10))
         self._last_sinny = 0
         
-        #self.shader = "fancysilhouette"
-        #self.shader_uniforms = {"shadowOffset": (-2/400, 2/400), "shadowColor": (0, 0, 0, 1)}
+        self.shader = "fancysilhouette"
+        self.shader_uniforms = {"shadowOffset": (-2/400, 2/400), "shadowColor": (0, 0, 0, 1)}
 
         self.make_bar()
 
@@ -68,6 +71,18 @@ class HealthBar(BasicSprite):
         rect(self.base_image, self.f_outline, ((200-(80)-2, self.sinny+(340)-2), (82*2, 12)))
         rect(self.base_image, self.f_back, ((200-80, self.sinny+(340)), (80*2, 8)))
         rect(self.base_image, self.f_full, (((200+80)-(80*2*self.flow), self.sinny+(340)), (80*2*self.flow, 8))) # TODO: fix flicker
+
+        # scoretext
+        for i in range(3): # as tyler intended
+            for ii in range(3):
+                eviltext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(0, 0, 0))
+                evil_rect = eviltext.get_rect(center=(200+i-1,388+ii-1))
+                self.base_image.blit(eviltext,evil_rect)
+
+
+        scoretext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(255, 255, 255))
+        st_rect = scoretext.get_rect(center=(200,388))
+        self.base_image.blit(scoretext,st_rect)
 
         bh = 0
         dh = 0
