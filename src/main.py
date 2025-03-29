@@ -323,6 +323,11 @@ def main():
     beat_hit_zoom_amount = .03
     last_beat = -1
 
+    last_fps_str= ""
+    
+    fps_surf: pygame.Surface = None
+    evil_fps_surf: pygame.Surface = None
+
     while True:
         dt = (clock.tick(FPS) / 1000) * FPS # get delta time
         for event in pygame.event.get():
@@ -529,9 +534,14 @@ def main():
 
                                 badguy.play_animation(anim)
                                 continue
-
-        screen.blit(globals.small_font.render("FPS: " + str(int(clock.get_fps())), False, pygame.Color(0, 0, 0, 128)), (17, 17))
-        screen.blit(globals.small_font.render("FPS: " + str(int(clock.get_fps())), False, pygame.Color(255, 255, 255)), (15, 15))
+        fps_str = f"FPS: {int(clock.get_fps())}"
+        
+        if fps_str != last_fps_str:
+            fps_surf = globals.small_font.render(fps_str, False, pygame.Color(255,255,255))
+            evil_fps_surf = globals.small_font.render(fps_str, False, pygame.Color(0,0,0,128))
+        screen.blit(evil_fps_surf, (17, 17))
+        screen.blit(fps_surf, (15, 15))
+        last_fps_str = fps_str
 
         globals.screen_shader.render()
 
