@@ -75,17 +75,16 @@ class HealthBar(BasicSprite):
         rect(self.base_image, self.f_back, ((200-80, self.sinny+(340)), (80*2, 8)))
         rect(self.base_image, self.f_full, (((200+80)-(80*2*self.flow), self.sinny+(340)), (80*2*self.flow, 8))) # TODO: fix flicker
 
+        eviltext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(0, 0, 0))
+        evil_rect = eviltext.get_rect(center=(200,388))
+
         # scoretext
         for i in range(3): # as tyler intended
             for ii in range(3):
-                eviltext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(0, 0, 0))
-                evil_rect = eviltext.get_rect(center=(200+i-1,388+ii-1))
-                self.base_image.blit(eviltext,evil_rect)
+                self.base_image.blit(eviltext,evil_rect.move(i-1,ii-1))
 
-
-        scoretext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(255, 255, 255))
-        st_rect = scoretext.get_rect(center=(200,388))
-        self.base_image.blit(scoretext,st_rect)
+        scoretext = globals.small_font.render(f"score: {self.coolscore} | misses: {self.misses}", False, pygame.Color(255,255,255))
+        self.base_image.blit(scoretext,evil_rect)
 
         bh = 0
         dh = 0
