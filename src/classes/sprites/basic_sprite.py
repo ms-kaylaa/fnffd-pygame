@@ -58,13 +58,9 @@ class BasicSprite(pygame.sprite.WeakSprite):
         if self.color != (255, 255, 255, 255) and frame_refresh:
             self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
 
-        if self.shader != self._last_shader:
-            print("i made shader objecct")
-            self._shader_obj = pygame_shaders.Shader(pygame_shaders.DEFAULT_VERTEX_SHADER, SHAD_DIRECTORY + self.shader + ".frag", self.image)
-            self._last_shader = self.shader
-
         if self.shader != None and frame_refresh:
-            print(self.shader, self.shader_uniforms)
+            # todo: this probably isnt very optimized
+            self._shader_obj = pygame_shaders.Shader(pygame_shaders.DEFAULT_VERTEX_SHADER, SHAD_DIRECTORY + self.shader + ".frag", self.image)
             if len(self.shader_uniforms) > 0:
                 for uniform in self.shader_uniforms:
                     # check if param is a callable (used to do pixel measurements)
