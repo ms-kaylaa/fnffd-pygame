@@ -25,6 +25,9 @@ class HealthBar(BasicSprite):
         self.coolscore = 0
         self.misses = 0
 
+        self._last_score = 0
+        self._last_misses = 0
+
         self.base_image = pygame.Surface((WINDOW_WIDTH//2, WINDOW_HEIGHT//2), pygame.SRCALPHA).convert_alpha() # TODO: base_image = bar frame, moving stuff is drawn/blitted on top
         self.rect = self.base_image.get_rect()
 
@@ -110,7 +113,10 @@ class HealthBar(BasicSprite):
         skill_diff = self.skill != self._last_skill
         flow_diff = self.flow != self._last_flow
 
-        if sin_diff or skill_diff or flow_diff:
+        miss_diff = self.misses != self._last_misses
+        score_diff = self.coolscore != self._last_score
+
+        if sin_diff or skill_diff or flow_diff or miss_diff or score_diff:
             self.make_bar()
             self.update_image()
             self.update_rect()
@@ -118,3 +124,4 @@ class HealthBar(BasicSprite):
         self._last_sinny = self.sinny
         self._last_skill = self.skill
         self._last_flow = self.flow
+        self._last_misses = self.misses
