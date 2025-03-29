@@ -556,5 +556,6 @@ if __name__ == "__main__":
         with open("debug/profile_results.txt", "w") as f:
             stats = pstats.Stats('debug/output.prof', stream=f)
             stats.strip_dirs().sort_stats("cumulative").print_stats()
+            os.remove('debug/output.prof')
     else:
         main()
