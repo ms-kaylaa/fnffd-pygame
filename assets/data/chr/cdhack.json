@@ -1,0 +1,39 @@
+{
+    "spritesheet": "cdhack",
+    
+    "animations": 
+    {
+        "idle":
+        {
+            "xml_name": "idle",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singLEFT":
+        {
+            "xml_name": "left",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singDOWN":
+        {
+            "xml_name": "down",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singUP":
+        {
+            "xml_name": "up",
+            "offsets": [0, 0],
+            "indices": []
+        },
+        "singRIGHT":
+        {
+            "xml_name": "right",
+            "offsets": [0, 0],
+            "indices": []
+        }
+    },
+
+    "scale": 1
+}

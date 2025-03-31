@@ -14,7 +14,8 @@ class Character(AnimatedSprite):
 
         made_char.animations = read_json['animations']
         made_char.scale = read_json['scale']
-        made_char.ayy_sound = read_json['ayy_sound']
+        if 'ayy_sound' in read_json:
+            made_char.ayy_sound = read_json['ayy_sound']
 
         return made_char
 

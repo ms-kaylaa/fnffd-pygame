@@ -9,6 +9,10 @@ uniform vec4 shadowColor;
 
 void main() {
     vec4 defColor = texture(image, fragmentTexCoord);
+    if(defColor.a == 0.0) {
+        color = defColor;
+        return;
+    }
     vec4 offsetColor = texture(image, fragmentTexCoord + shadowOffset);
 
     float offsetX = fragmentTexCoord.x + shadowOffset.x;

@@ -29,19 +29,26 @@ from classes.stage.ui.health_bar import HealthBar
 from classes.upscale_group import UpscaleGroup
 from classes.camera import Camera
 
+dude:Character = None
+badguy:Character = None
+lady:Character = None
+
 def main():
     dude = Character.load_from_json("dude")
     dude.x, dude.y = 525, 290
     dude.xx, dude.yy = 525, 290
     dude.play_animation("idle")
 
-    badguy = Character.load_from_json("cyan")
+    badguy = Character.load_from_json("cdhack")
     badguy.x, badguy.y = 280, 290
     badguy.xx, badguy.yy = badguy.x, badguy.y
     badguy.play_animation("idle")
 
-    #hb2 = StaticSprite(-35, 75, loader.load_image("stage_assets/backyard/houseback2.png"))
-    #hb2.scroll_factor = pygame.math.Vector2(0.5, 0.5)
+    dude.shader = "shadow"
+    dude.color = (128, 255, 128, 255)
+    def getOffset():
+        return [-(1/dude.image.get_width())*3, (1/dude.image.get_height())*3]
+    dude.shader_uniforms = {"shadowColor": [0,0,0,0.7], "shadowOffset": getOffset}
 
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
@@ -133,7 +140,7 @@ def main():
                     dingus.should_draw = True
                     dingus.should_update = True
 
-    notes = [player_notes, badguy_notes]
+    notes: list[list[Note]] = [player_notes, badguy_notes]
     
 
     file.close()
@@ -153,6 +160,9 @@ def main():
     # stagehand LITE!
     bg_group = []
     fg_group = [] # idk if ill use this
+
+    from stages.w3 import W3Stage
+    stage = W3Stage()
     match song:
         case 'mus_w3s2-old':
             badguy.x = 185
@@ -161,30 +171,11 @@ def main():
             dude.x = 425
             dude.y = 320 + dude.base_image.get_height()
             
-            # budy
-            wd = "stage_assets/buddy/"
-            scarysin2 = round(2*(math.sin((pygame.time.get_ticks()-300)/350)))
-
-            back = StaticSprite(40, scarysin2, loader.load_image(f"{wd}buddyback_3"))
-            back.scroll_factor = (0.33, 0.33)
-
-            tvs = StaticSprite(50, scarysin2-60, loader.load_image(f"{wd}buddyback_2"))
-            tvs.scroll_factor = (0.25, 1)
-
-            tvshade = StaticSprite(tvs.x, tvs.y, loader.load_image(f"{wd}buddyback_2"))
-            tvshade.scroll_factor = tvs.scroll_factor
-            tvshade.color = (0,0,0)
-            tvshade.alpha = 255*0.15
-
-            fore = StaticSprite(100, -40, loader.load_image(f"{wd}buddyback"))
-
-            bg_group.append(back)
-            bg_group.append(tvs)
-            bg_group.append(tvshade)
-            bg_group.append(fore)
+            bg_group = stage.make_bg_sprites()
+            fg_group = stage.make_fg_sprites()
 
     global grp
-    grp = Camera(bg_group, lady, badguy, dude)
+    grp = Camera(bg_group, lady, badguy, dude, fg_group)
     grp.pos = pygame.math.Vector2(200, 0)
 
     global note_xoff, note_yoff
@@ -240,7 +231,7 @@ def main():
                 dude.play_animation(anim)
                 break
 
-        if not hit_note:
+        if not hit_note: # you tried to hit a note when there were no notes to hit
             bar.flow = 0
             bar.skill = awesome_util.clamp(bar.skill + 5, 0, 100)
             bar.misses+=1
@@ -274,12 +265,10 @@ def main():
                 # dudecam
                 cam_targ_x = dude.x-350
                 cam_targ_y = dude.y-400
-                note_xoff = note_yoff = 0
             case 6:
                 # badguy cam
                 cam_targ_x = badguy.x-150
                 cam_targ_y = badguy.y-400
-                note_xoff = note_yoff = 0
             case 7:
                 char_hit.play_animation(char_hit.ayy_anim)
                 # todo: ayy sound
@@ -338,6 +327,8 @@ def main():
             #    targ_cam_zoom += event.y * 0.03
             
         screen.fill((145, 207, 221))
+
+        stage.update()
 
         keys = pygame.key.get_pressed()
 
@@ -489,7 +480,7 @@ def main():
         for note_list in notes:
             for note in note_list:
                 note.y = note.yy - ymod
-                if note.y < 400 and note.rect.bottom > 0: # cull offscreen notes
+                if note.y < 400 and note.rect.bottom > -60: # cull offscreen notes
                     # re-enable drawing if it's offscreen
                     if not note.should_draw:
                         note.should_draw = True
@@ -534,6 +525,12 @@ def main():
 
                                 badguy.play_animation(anim)
                                 continue
+                elif note.rect.bottom < -60:
+                    print("dats offscreen")
+                    bar.misses += 1
+                    note.kill()
+                    note_list.remove(note)
+
         fps_str = f"FPS: {int(clock.get_fps())}"
         
         if fps_str != last_fps_str:

@@ -4,7 +4,7 @@ import pygame_shaders
 from globals import SHAD_DIRECTORY
 
 
-class BasicSprite(pygame.sprite.WeakSprite):
+class BasicSprite(pygame.sprite.Sprite):
     def __init__(self, x: float, y:  float, alpha=255, angle=0, scale=1):
         super().__init__()
 
@@ -38,24 +38,25 @@ class BasicSprite(pygame.sprite.WeakSprite):
     def set_image(self, img: pygame.Surface):
         self.base_image = img
         self.rect = self.base_image.get_rect()
+        self.update_image(True)
         
-    def update_image(self):
+    def update_image(self, force=False):
         if self.parent != None and not self.rect.colliderect(self.parent.internal_rect):
             return
         frame_refresh = False
 
-        if self.image == None or self.base_image != self.image:
-            self.image = self.base_image
+        if self.image == None or (self._last_alpha != self.alpha or self._last_angle != self.angle or self._last_scale != self.scale) or force:
+            self.image = self.base_image.copy()
             frame_refresh = True
 
-        if frame_refresh or self._last_scale != self.scale:
+        if (frame_refresh and self._last_scale != self.scale) or force:
             self.image = pygame.transform.scale_by(self.base_image, self.scale)
-        if frame_refresh or self._last_angle != self.angle:
+        if (frame_refresh and self._last_angle != self.angle) or force:
             self.image = pygame.transform.rotate(self.image, self.angle)
-        if frame_refresh or self._last_alpha != self.alpha:
+        if (frame_refresh and (self.image.get_alpha() != self.alpha or self._last_alpha != self.alpha)) or force:
             self.image.set_alpha(self.alpha)
         
-        if self.color != (255, 255, 255, 255) and frame_refresh:
+        if (self.color != (255, 255, 255, 255) and frame_refresh) or force:
             self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
 
         if self.shader != None and frame_refresh:

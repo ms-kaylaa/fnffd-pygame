@@ -13,5 +13,5 @@ void main() {
         pixelcheck.rgb = colorreplace.rgb; //replace color
     }
 
-    color = vec4(1, 0, 0, 1);
+    color = pixelcheck;
 }
