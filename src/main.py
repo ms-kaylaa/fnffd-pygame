@@ -44,14 +44,30 @@ def main():
     badguy.xx, badguy.yy = badguy.x, badguy.y
     badguy.play_animation("idle")
 
-    dude.shader = "shadow"
-    dude.color = (128, 255, 128, 255)
-    def getOffset():
-        return [-(1/dude.image.get_width())*3, (1/dude.image.get_height())*3]
-    dude.shader_uniforms = {"shadowColor": [0,0,0,0.7], "shadowOffset": getOffset}
+    dude.shaders.append("shadow")
+    #dude.color = (128, 255, 128, 255)
+    dude.colorignorelist.append((32, 30, 40))
+    dude.color = (128, 128, 128, 255)
+    def getDOffset():
+        return [-(1/dude.image.get_width())*3, (1/dude.image.get_height())*7]
+    dude.shaders_uniforms.append({"shadowColor": [0,0,0,0.4], "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
+
+    badguy.shaders = dude.shaders
+    badguy.colorignorelist.append((255,255,255,255))
+    badguy.color = dude.color
+    def getBOffset():
+        return [(1/badguy.image.get_width())*3, (1/badguy.image.get_height())*7]
+    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
 
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
+
+    lady.shaders = dude.shaders
+    lady.color = dude.color
+    def getLOffset():
+        return [0, (1/lady.image.get_height())*7]
+    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+    lady.update_image(True)
 
     bar = HealthBar()
 
@@ -158,6 +174,12 @@ def main():
     vidsprite.video.toggle_pause()
 
     # stagehand LITE!
+    global beat_hit_zoom_interval, beat_hit_zoom_amount, beat_hit_character_idle_interval
+    beat_hit_zoom_interval = 10000000
+    beat_hit_zoom_amount = .03
+    beat_hit_character_idle_interval = 2
+    last_beat = -1
+
     bg_group = []
     fg_group = [] # idk if ill use this
 
@@ -173,6 +195,8 @@ def main():
             
             bg_group = stage.make_bg_sprites()
             fg_group = stage.make_fg_sprites()
+
+            #beat_hit_character_idle_interval = 1
 
     global grp
     grp = Camera(bg_group, lady, badguy, dude, fg_group)
@@ -213,17 +237,6 @@ def main():
                 bar.skill = awesome_util.clamp(bar.skill - 1, 0, 100)
 
                 bar.coolscore += 100
-
-                # cool camera shift thing
-                match note.dir_int:
-                    case 0:
-                        note_xoff = -10
-                    case 1:
-                        note_yoff = 10
-                    case 2:
-                        note_yoff = -10
-                    case 3:
-                        note_xoff = 10
 
                 if note.note_type == 2:
                     anim += "-alt"
@@ -279,11 +292,14 @@ def main():
                 match event_num:
                     case 0:
                         targ_cam_zoom = 1.4
+                        stage.colorto = (0, 255, 0)
                     case 1:
                         targ_cam_zoom = 1.15
                         grp.fade_color = (255, 255, 255)
                         grp.fade_alpha = 128
                         grp.fade_speed = -15
+
+                        stage.colorto = (0, 0, 255)
 
                         beat_hit_zoom_amount = .03
                         beat_hit_zoom_interval = 4
@@ -306,11 +322,6 @@ def main():
                 vidsprite.video.toggle_pause()
                 vidsprite.video.seek(0.15)
                 event_hit = True
-
-    global beat_hit_zoom_interval, beat_hit_zoom_amount
-    beat_hit_zoom_interval = 10000000
-    beat_hit_zoom_amount = .03
-    last_beat = -1
 
     last_fps_str= ""
     
@@ -439,6 +450,10 @@ def main():
                 if grp.zoom != targ_cam_zoom and (grp.zoom < targ_cam_zoom + .005 != grp.zoom > targ_cam_zoom - .005):
                     grp.zoom = targ_cam_zoom  
 
+            dude.color = stage.colorfrom.lerp(stage.colorfrom.grayscale() // pygame.Color(3, 3, 3, 1), 0.8)
+            badguy.color = dude.color
+            lady.color = dude.color
+
             grp.update(dt)
         grp.draw(screen)
 
@@ -460,7 +475,7 @@ def main():
         conductor.time = (pygame.mixer.music.get_pos() + 0.01) / 1000
 
         if last_beat < conductor.beat:
-            if conductor.beat % 2 == 0:
+            if conductor.beat % beat_hit_character_idle_interval == 0:
                 if not dude.animating or dude.cur_named_anim == "idle":
                     dude.play_animation("idle")
                 if not badguy.animating or badguy.cur_named_anim == "idle":

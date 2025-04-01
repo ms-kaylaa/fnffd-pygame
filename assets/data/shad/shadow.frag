@@ -7,10 +7,14 @@ in vec2 fragmentTexCoord;
 uniform vec2 shadowOffset;
 uniform vec4 shadowColor;
 
+uniform vec3 ignoreRGB;
+
 void main() {
     vec4 defColor = texture(image, fragmentTexCoord);
-    if(defColor.a == 0.0) {
-        color = defColor;
+    if((defColor.rgb == ignoreRGB)) {
+        if(defColor.rgb == ignoreRGB) {
+            color = vec4(1, 1, 1, 1);
+        } else color = defColor;
         return;
     }
     vec4 offsetColor = texture(image, fragmentTexCoord + shadowOffset);

@@ -17,12 +17,13 @@ class BasicSprite(pygame.sprite.Sprite):
         self.scroll_factor = pygame.math.Vector2(1, 1)
 
         self.color = (255, 255, 255, 255)
+        self.colorignorelist = []
 
-        self.shader: str = None
-        self._last_shader: str = None
-        self.shader_uniforms = {}
+        self.shaders: list[str] = []
+        self._last_shaders: list[str] = []
+        self.shaders_uniforms = []
 
-        self._shader_obj: pygame_shaders.Shader = None
+        self._shaders_objs: list[pygame_shaders.Shader] = []
 
         self._last_alpha = -1
         self._last_angle = -1
@@ -57,20 +58,39 @@ class BasicSprite(pygame.sprite.Sprite):
             self.image.set_alpha(self.alpha)
         
         if (self.color != (255, 255, 255, 255) and frame_refresh) or force:
-            self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
+            # MASK BECAUSE IM STUPID
+            # TODO: ignore dude eyes or possible "ignore" list for coloring ( for cd boy :) )
+            masksurf = self.image.copy()
+            for color in self.colorignorelist:
+                masksurf.set_colorkey(color)
+            mask = pygame.mask.from_surface(masksurf)
+            color_surf = mask.to_surface(setcolor=self.color, unsetcolor=(255,255,255,255))
+            
+            self.image.blit(color_surf, special_flags=pygame.BLEND_MULT)
 
-        if self.shader != None and frame_refresh:
-            # todo: this probably isnt very optimized
-            self._shader_obj = pygame_shaders.Shader(pygame_shaders.DEFAULT_VERTEX_SHADER, SHAD_DIRECTORY + self.shader + ".frag", self.image)
-            if len(self.shader_uniforms) > 0:
-                for uniform in self.shader_uniforms:
-                    # check if param is a callable (used to do pixel measurements)
-                    if not callable(self.shader_uniforms[uniform]):
-                        self._shader_obj.send(uniform, self.shader_uniforms[uniform])
-                    else:
-                        self._shader_obj.send(uniform, self.shader_uniforms[uniform]())
+        if self.shaders != None and frame_refresh:
+            if len(self.shaders) != len(self._last_shaders):
+                if len(self.shaders) > len(self._last_shaders):
+                    # new shaders have been added
+                    for i in range(len(self.shaders) - len(self._last_shaders)):
+                        self._shaders_objs.append(pygame_shaders.Shader(pygame_shaders.DEFAULT_VERTEX_SHADER, SHAD_DIRECTORY + self.shaders[i+len(self._last_shaders)] + ".frag", self.image))
+                self._last_shaders = self.shaders
 
-            self.image = self._shader_obj.render()
+            i = 0
+            for obj in self._shaders_objs:
+                obj.set_target_surface(self.image)
+                
+                # todo: this probably isnt very optimized
+                if len(self.shaders_uniforms) > 0:
+                    for uniform in self.shaders_uniforms[i]:
+                        # check if param is a callable (used to do pixel measurements)
+                        if not callable(self.shaders_uniforms[i][uniform]):
+                            obj.send(uniform, self.shaders_uniforms[i][uniform])
+                        else:
+                            obj.send(uniform, self.shaders_uniforms[i][uniform]())
+
+                self.image = obj.render()
+                i += 1
 
         self._last_alpha = self.alpha
         self._last_angle = self.angle

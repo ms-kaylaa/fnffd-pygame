@@ -47,8 +47,8 @@ class HealthBar(BasicSprite):
         self.sinny = round(math.sin(pygame.time.get_ticks()/200))
         self._last_sinny = 0
         
-        self.shader = "fancysilhouette"
-        self.shader_uniforms = {"shadowOffset": (-2/400, 2/200), "shadowColor": (0, 0, 0, 1)}
+        self.shaders = ["fancysilhouette"]
+        self.shaders_uniforms = [{"shadowOffset": (-2/400, 2/200), "shadowColor": (0, 0, 0, 1)}]
 
         self.y = 200
         self.make_bar()
