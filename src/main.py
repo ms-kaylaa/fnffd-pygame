@@ -44,29 +44,34 @@ def main():
     badguy.xx, badguy.yy = badguy.x, badguy.y
     badguy.play_animation("idle")
 
+    dude.shaders.append("silhouette")
+    dude.shaders.append("shadow")
     dude.shaders.append("shadow")
     #dude.color = (128, 255, 128, 255)
-    dude.colorignorelist.append((32, 30, 40))
-    dude.color = (128, 128, 128, 255)
     def getDOffset():
-        return [-(1/dude.image.get_width())*3, (1/dude.image.get_height())*7]
-    dude.shaders_uniforms.append({"shadowColor": [0,0,0,0.4], "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
+        return [-(1/dude.image.get_width())*4, (1/dude.image.get_height())*4]
+    colorgo2 = (75/70/255, 46/70/255, 112/70/255, 0.41)
+    dude.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [32/255,30/255,40/255]})
+    dude.shaders_uniforms.append({"shadowColor": colorgo2, "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
+    dude.shaders_uniforms.append({"shadowColor": (0,0,0,0.34), "shadowOffset": getDOffset, "ignoreRGB": [1,1,1]})
 
     badguy.shaders = dude.shaders
     badguy.colorignorelist.append((255,255,255,255))
-    badguy.color = dude.color
+    #badguy.color = dude.color
     def getBOffset():
-        return [(1/badguy.image.get_width())*3, (1/badguy.image.get_height())*7]
-    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
+        return [(1/badguy.image.get_width())*4, (1/badguy.image.get_height())*4]
+    badguy.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
+    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
+    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
 
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
 
-    lady.shaders = dude.shaders
+    #lady.shaders = dude.shaders
     lady.color = dude.color
     def getLOffset():
         return [0, (1/lady.image.get_height())*7]
-    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+    #lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
     lady.update_image(True)
 
     bar = HealthBar()
@@ -292,14 +297,14 @@ def main():
                 match event_num:
                     case 0:
                         targ_cam_zoom = 1.4
-                        stage.colorto = (0, 255, 0)
+                        stage.colorto = (75,46,112)
                     case 1:
                         targ_cam_zoom = 1.15
                         grp.fade_color = (255, 255, 255)
                         grp.fade_alpha = 128
                         grp.fade_speed = -15
 
-                        stage.colorto = (0, 0, 255)
+                        #stage.colorto = (0, 0, 255)
 
                         beat_hit_zoom_amount = .03
                         beat_hit_zoom_interval = 4
@@ -450,9 +455,9 @@ def main():
                 if grp.zoom != targ_cam_zoom and (grp.zoom < targ_cam_zoom + .005 != grp.zoom > targ_cam_zoom - .005):
                     grp.zoom = targ_cam_zoom  
 
-            dude.color = stage.colorfrom.lerp(stage.colorfrom.grayscale() // pygame.Color(3, 3, 3, 1), 0.8)
-            badguy.color = dude.color
-            lady.color = dude.color
+            #dude.color = stage.colorfrom.lerp(stage.colorfrom.grayscale() // pygame.Color(3, 3, 3, 1), 0.8)
+            #badguy.color = dude.color
+            #lady.color = dude.color
 
             grp.update(dt)
         grp.draw(screen)

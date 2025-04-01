@@ -52,6 +52,9 @@ class W3Stage(BaseStage):
         self.tvshade.update_image(True)
 
         self.fore = StaticSprite(100, -40, loader.load_image(f"{self.wd}buddyback"))
+        self.fore.shaders = ["silhouette"]
+        self.fore.shaders_uniforms.append({"colorreplace": (75/70/255, 46/70/255, 112/70/255, 0.5), "ignoreRGB": (2,2,2)})
+        self.fore.update_image(True)
 
         return [self.back, self.tvback, self.tvs, self.tvshade, self.fore]
 
