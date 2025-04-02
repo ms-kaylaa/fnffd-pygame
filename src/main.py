@@ -67,11 +67,13 @@ def main():
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
 
-    #lady.shaders = dude.shaders
+    lady.shaders = dude.shaders
     lady.color = dude.color
     def getLOffset():
         return [0, (1/lady.image.get_height())*7]
-    #lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[0]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+    lady.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
+    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
     lady.update_image(True)
 
     bar = HealthBar()
@@ -297,7 +299,7 @@ def main():
                 match event_num:
                     case 0:
                         targ_cam_zoom = 1.4
-                        stage.colorto = (75,46,112)
+                        stage.colorto = (75,46,112,255)
                     case 1:
                         targ_cam_zoom = 1.15
                         grp.fade_color = (255, 255, 255)
@@ -434,7 +436,7 @@ def main():
 
         cam_lerp_amt = 0.075/2*dt
 
-        if not paused:
+        if not paused and not event_hit:
             x_lerp = cam_targ_x
             if grp.pos[0] != cam_targ_x and abs(grp.pos[0] - cam_targ_x) > .7:
                 x_lerp = awesome_util.lerp(grp.pos[0], x_lerp, cam_lerp_amt)
@@ -460,7 +462,8 @@ def main():
             #lady.color = dude.color
 
             grp.update(dt)
-        grp.draw(screen)
+        
+        if not event_hit: grp.draw(screen)
 
         if globals.HAS_FFMPEG and event_hit:
             vidsprite.update(dt)
@@ -473,7 +476,7 @@ def main():
         
 
         for note in player_ui_notes + badguy_ui_notes:
-            note.update(dt)
+            if note.rect.colliderect(ui_group.internal_rect): note.update(dt)
         bar.update(dt)
         ui_group.draw(screen)
 
@@ -545,7 +548,7 @@ def main():
 
                                 badguy.play_animation(anim)
                                 continue
-                elif note.rect.bottom < -60:
+                elif note.rect.bottom < -60 and note.solid:
                     print("dats offscreen")
                     bar.misses += 1
                     note.kill()

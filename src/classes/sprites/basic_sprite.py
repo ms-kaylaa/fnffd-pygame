@@ -57,16 +57,19 @@ class BasicSprite(pygame.sprite.Sprite):
         if (frame_refresh and (self.image.get_alpha() != self.alpha or self._last_alpha != self.alpha)) or force:
             self.image.set_alpha(self.alpha)
         
-        if (self.color != (255, 255, 255, 255) and frame_refresh) or force:
-            # MASK BECAUSE IM STUPID
-            # TODO: ignore dude eyes or possible "ignore" list for coloring ( for cd boy :) )
-            masksurf = self.image.copy()
-            for color in self.colorignorelist:
-                masksurf.set_colorkey(color)
-            mask = pygame.mask.from_surface(masksurf)
-            color_surf = mask.to_surface(setcolor=self.color, unsetcolor=(255,255,255,255))
+        if (self.color != (255, 255, 255, 255) and self.color != (255,255,255) and frame_refresh) or force:
+            if len(self.colorignorelist) != 0:
+                # MASK BECAUSE IM STUPID
+                masksurf = self.image.copy()
+                for color in self.colorignorelist:
+                    masksurf.set_colorkey(color)
+                mask = pygame.mask.from_surface(masksurf)
+                color_surf = mask.to_surface(setcolor=self.color, unsetcolor=(255,255,255,255))
             
-            self.image.blit(color_surf, special_flags=pygame.BLEND_MULT)
+                self.image.blit(color_surf, special_flags=pygame.BLEND_MULT)
+            else:
+                self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
+
 
         if self.shaders != None and frame_refresh:
             if len(self.shaders) != len(self._last_shaders):

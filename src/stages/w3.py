@@ -47,8 +47,7 @@ class W3Stage(BaseStage):
 
         self.tvshade = StaticSprite(self.tvs.x, self.tvs.y+3, loader.load_image(f"{self.wd}buddyback_2"))
         self.tvshade.scroll_factor = self.tvs.scroll_factor
-        self.tvshade.color = (0,0,0,255)
-        self.tvshade.alpha = 129
+        self.tvshade.color = (0,0,0,128)
         self.tvshade.update_image(True)
 
         self.fore = StaticSprite(100, -40, loader.load_image(f"{self.wd}buddyback"))

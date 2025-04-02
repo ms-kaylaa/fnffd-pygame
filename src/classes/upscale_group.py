@@ -7,7 +7,7 @@ class UpscaleGroup(pygame.sprite.Group):
         super().__init__(sprites)
 
         self.internal_surf = pygame.Surface((400, 400)).convert_alpha()
-        self.internal_rect = self.internal_surf.get_rect(center=(WINDOW_WIDTH//2, WINDOW_HEIGHT//2))
+        self.internal_rect = self.internal_surf.get_rect(center=(WINDOW_WIDTH//2, WINDOW_HEIGHT//2)).scale_by(1.4,1.4).move(-100,-100)
 
         self.alpha = 255
         
@@ -16,7 +16,7 @@ class UpscaleGroup(pygame.sprite.Group):
         self.internal_surf.fill((0, 0, 0, 0))
 
         for sprite in self.sprites():
-            if sprite.should_draw and sprite.rect.colliderect(self.internal_rect.scale_by(1.4,1.4).move(-100,-100)) and sprite.image != None:
+            if sprite.should_draw and sprite.rect.colliderect(self.internal_rect) and sprite.image != None:
                 self.internal_surf.blit(sprite.image, sprite.rect.topleft)
 
         # 2x upscale like free download does
@@ -30,5 +30,5 @@ class UpscaleGroup(pygame.sprite.Group):
 
     def update(self, *args, **kwargs):
         for sprite in self.sprites():
-            if sprite.should_update:
+            if sprite.should_update and sprite.rect.colliderect(self.internal_rect):
                 sprite.update(*args)
