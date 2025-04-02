@@ -29,7 +29,7 @@ class AnimatedSprite(BasicSprite):
             
                 self.set_image(self.frames[self.cur_frame])
 
-        self.update_image()
+        #self.update_image()
 
     
 

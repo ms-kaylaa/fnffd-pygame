@@ -1,6 +1,7 @@
 import pygame
 import pygame_shaders
 
+import globals
 from globals import SHAD_DIRECTORY
 
 
@@ -71,7 +72,7 @@ class BasicSprite(pygame.sprite.Sprite):
                 self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
 
 
-        if self.shaders != None and frame_refresh:
+        if self.shaders != None and frame_refresh and globals.options["shaders_enabled"]:
             if len(self.shaders) != len(self._last_shaders):
                 if len(self.shaders) > len(self._last_shaders):
                     # new shaders have been added

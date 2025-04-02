@@ -21,6 +21,7 @@ class UINote(AnimatedSprite):
     def ui_press(self):
         self.alpha_timer = 6
         self.alpha = 128
+        self.color = (128,128,128,255)
         self.update_image(True)
 
     def update(self, dt):
@@ -29,4 +30,5 @@ class UINote(AnimatedSprite):
             if self.alpha_timer <= 0:
                 self.alpha_timer = 0
                 self.alpha = 255
+                self.color = (255,255,255,255)
                 self.update_image()

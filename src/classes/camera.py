@@ -46,7 +46,7 @@ class Camera(pygame.sprite.Group):
         if self.alpha != 255:
             scaled_surf.set_alpha(self.alpha)
 
-        surf.blit(scaled_surf, scaled_rect)
+        surf.blit(scaled_surf, (scaled_rect.x, scaled_rect.y))
 
     def update(self, *args, **kwargs):
         for sprite in self.sprites():

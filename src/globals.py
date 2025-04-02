@@ -20,8 +20,24 @@ screen = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
 screen_shader = pygame_shaders.DefaultScreenShader(screen)
 clock = pygame.time.Clock()
 
-# -= probably-often reused variables -= #
+# -= default options =- #
+options = {
+    # visual options
+    "shaders_enabled": True,
+
+    # binds
+    "bind_left": pygame.K_d,
+    "bind_down": pygame.K_f,
+    "bind_up": pygame.K_j,
+    "bind_right": pygame.K_k,
+
+    "bind_select": pygame.K_RETURN,
+    "bind_back": pygame.K_ESCAPE
+}
+
+# -= game vars -= #
 small_font = pygame.font.Font("assets/fnt/fnt-comic1.ttf", 14)
+gamestate = "stage"
 
 # -= DIRECTORIES =- #
 

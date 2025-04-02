@@ -43,6 +43,3 @@ class Character(AnimatedSprite):
         super().play_animation(self.animations[name]['xml_name'], self.animations[name]["indices"])
         self.cur_named_anim = name
         self.update_rect()
- 
-    def _update_animation(self, dt):
-        super()._update_animation(dt)
