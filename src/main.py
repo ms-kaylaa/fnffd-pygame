@@ -475,10 +475,16 @@ def main():
                 screen.blit(vidsprite.image, vidsprite.rect) 
         
 
-        for note in player_ui_notes + badguy_ui_notes:
-            if note.rect.colliderect(ui_group.internal_rect): note.update(dt)
-        bar.update(dt)
         ui_group.draw(screen)
+        if not paused:
+            for note in player_ui_notes + badguy_ui_notes:
+                if note.rect.colliderect(ui_group.internal_rect): note.update(dt)
+        bar.update(dt)
+
+        if paused:
+            pause_surf = pygame.Surface((800, 800), flags=pygame.SRCALPHA).convert_alpha()
+            pause_surf.fill((0,0,0,128))
+            screen.blit(pause_surf, (0,0))
 
         conductor.time = (pygame.mixer.music.get_pos() + 0.01) / 1000
 
