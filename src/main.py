@@ -6,12 +6,15 @@ import cProfile, pstats, os
 import globals
 
 from states import stage
+from states import freeplay
 
 
 def get_module_from_state(state):
     match state:
         case "stage":
             return stage
+        case "freeplay":
+            return freeplay
 def run_state_machine():
     last_gamestate = ""
     while globals.gamestate != pygame.QUIT:
@@ -25,6 +28,8 @@ def run_state_machine():
             state.run()
         except Exception as e:
             print(e)
+            import sys
+            sys.exit(1)
 
     pygame.quit()
 

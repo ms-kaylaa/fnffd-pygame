@@ -37,7 +37,7 @@ options = {
 
 # -= game vars -= #
 small_font = pygame.font.Font("assets/fnt/fnt-comic1.ttf", 14)
-gamestate = "stage"
+gamestate = "freeplay"
 
 # -= DIRECTORIES =- #
 

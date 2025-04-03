@@ -37,6 +37,8 @@ class BasicSprite(pygame.sprite.Sprite):
         self.should_draw = True
         self.should_update = True
 
+        self.depth = 0
+
     def set_image(self, img: pygame.Surface):
         self.base_image = img
         self.rect = self.base_image.get_rect()
@@ -106,5 +108,5 @@ class BasicSprite(pygame.sprite.Sprite):
         self.rect.topleft = (self.x, self.y)
 
     def update(self, dt):
-        self.update_image()
+        self.update_image(True)
         self.update_rect()

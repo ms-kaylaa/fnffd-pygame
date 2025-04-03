@@ -53,6 +53,9 @@ last_fps_str = ""
 fps_surf: pygame.Surface = None
 evil_fps_surf: pygame.Surface = None
 
+# STUPID
+vidsprite:VideoSprite = None
+
 # beat stuff
 conductor:Conductor = None
 last_beat = -1
@@ -122,7 +125,7 @@ def check_hold_note(id, anim):
             break
 
 def execute_special_note(note_type, player_note):
-    global cam_targ_x, cam_targ_y, event_hit, event_num, targ_cam_zoom, grp, video_start_time, note_xoff, note_yoff
+    global cam_targ_x, cam_targ_y, event_hit, event_num, targ_cam_zoom, grp, video_start_time, note_xoff, note_yoff, vidsprite
     char_hit = dude if player_note else badguy
     #print ("execcing " + str(note_type))
     match note_type:
@@ -177,7 +180,7 @@ def execute_special_note(note_type, player_note):
 
 
 def init():
-    global dude, badguy, lady, songlong, songbeat, notes
+    global dude, badguy, lady, songlong, songbeat, notes, vidsprite
     dude = Character.load_from_json("dude")
     dude.x, dude.y = 525, 290
     dude.xx, dude.yy = 525, 290
@@ -594,5 +597,3 @@ def run():
         globals.screen_shader.render()
 
         pygame.display.flip()
-    
-    globals.gamestate = pygame.QUIT

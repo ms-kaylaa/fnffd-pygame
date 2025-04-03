@@ -15,7 +15,8 @@ class UpscaleGroup(pygame.sprite.Group):
     def draw(self, surf: pygame.Surface):
         self.internal_surf.fill((0, 0, 0, 0))
 
-        for sprite in self.sprites():
+        def bydepth(spr): return spr.depth
+        for sprite in sorted(self.sprites(), key=bydepth):
             if sprite.should_draw and sprite.rect.colliderect(self.internal_rect) and sprite.image != None:
                 self.internal_surf.blit(sprite.image, sprite.rect.topleft)
 
@@ -32,3 +33,4 @@ class UpscaleGroup(pygame.sprite.Group):
         for sprite in self.sprites():
             if sprite.should_update and sprite.rect.colliderect(self.internal_rect):
                 sprite.update(*args)
+                
