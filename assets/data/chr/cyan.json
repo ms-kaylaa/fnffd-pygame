@@ -1,86 +1,102 @@
 {
     "spritesheet": "cyan",
-    
-    "animations": 
-    {
-        "idle":
-        {
+    "animations": {
+        "idle": {
             "xml_name": "cyan idle",
-            "offsets": [0, 0],
+            "offsets": [
+                -0.17999999999999927,
+                0
+            ],
             "indices": []
         },
-        
-        "singLEFT":
-        {
+        "singLEFT": {
             "xml_name": "cyan left",
-            "offsets": [0, 0],
+            "offsets": [
+                -8.819999999999999,
+                20.879999999999995
+            ],
             "indices": []
         },
-        "singDOWN":
-        {
+        "singDOWN": {
             "xml_name": "cyan down",
-            "offsets": [0, 0],
+            "offsets": [
+                -48.959999999999994,
+                43.019999999999996
+            ],
             "indices": []
         },
-        "singUP":
-        {
+        "singUP": {
             "xml_name": "cyan up",
-            "offsets": [0, 0],
+            "offsets": [
+                -18.36,
+                -6.12
+            ],
             "indices": []
         },
-        "singRIGHT":
-        {
+        "singRIGHT": {
             "xml_name": "cyan right",
-            "offsets": [0, 0],
+            "offsets": [
+                -4.319999999999999,
+                0.0
+            ],
             "indices": []
         },
-
-        "singLEFT-alt":
-        {
+        "singLEFT-alt": {
             "xml_name": "cyan left alt",
-            "offsets": [0, 0],
+            "offsets": [
+                0,
+                0
+            ],
             "indices": []
         },
-        "singDOWN-alt":
-        {
+        "singDOWN-alt": {
             "xml_name": "cyan down alt",
-            "offsets": [0, 0],
+            "offsets": [
+                3.06,
+                8.82
+            ],
             "indices": []
         },
-        "singUP-alt":
-        {
+        "singUP-alt": {
             "xml_name": "cyan up alt",
-            "offsets": [0, 0],
+            "offsets": [
+                -2.88,
+                -8.64
+            ],
             "indices": []
         },
-        "singRIGHT-alt":
-        {
+        "singRIGHT-alt": {
             "xml_name": "cyan right alt",
-            "offsets": [0, 0],
+            "offsets": [
+                0,
+                0
+            ],
             "indices": []
         },
-
-        "ayy":
-        {
+        "ayy": {
             "xml_name": "cyan ayy",
-            "offsets": [0, 0],
+            "offsets": [
+                3.06,
+                14.76
+            ],
             "indices": []
         },
-
-        "snore up":
-        {
+        "snore up": {
             "xml_name": "cyan snore up",
-            "offsets": [0, 0],
+            "offsets": [
+                -12.24,
+                15.480000000000002
+            ],
             "indices": []
         },
-        "snore down":
-        {
+        "snore down": {
             "xml_name": "cyan snore down",
-            "offsets": [0, 0],
+            "offsets": [
+                -12.239999999999998,
+                18.36
+            ],
             "indices": []
         }
     },
-
-    "ayy_sound": "dude_ayy",
     "scale": 1
 }

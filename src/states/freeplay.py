@@ -205,7 +205,7 @@ def run():
     global iconsprites, iconxshift, selected, infocard, discsprite, fader, backsprite, layersprite, possurf
     discstarts = [discsprite.x, discsprite.y]
 
-    left_pressed, right_pressed, enter_pressed = False, False, False
+    left_pressed, right_pressed, enter_pressed, nine_pressed = False, False, False, False
 
     global moveon
     moveon = False # should be true. im looking at you free download community
@@ -258,6 +258,14 @@ def run():
             enter_pressed = False
 
         if not selected: iconymods[cursel] = (-65)+math.sin(pygame.time.get_ticks()/700)*6
+
+        # hello offsets!
+        if keys[pygame.K_9] and not nine_pressed:
+            globals.gamestate = "offseteditor"
+            nine_pressed = True
+            moveon = True
+        elif not keys[pygame.K_9]:
+            nine_pressed = False
 
         iconxshift = lerp(iconxshift, targxshift, 0.15)
         for i in range(len(iconsprites)):

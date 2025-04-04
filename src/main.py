@@ -11,6 +11,7 @@ from util.awesome_util import play_snd
 
 from states import stage
 from states import freeplay
+from states import offseteditor
 
 
 def get_module_from_state(state):
@@ -19,6 +20,8 @@ def get_module_from_state(state):
             return stage
         case "freeplay":
             return freeplay
+        case "offseteditor":
+            return offseteditor
         
 def check_vol_binds():
     up_pressed, down_pressed = False, False
