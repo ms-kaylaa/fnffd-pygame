@@ -29,6 +29,7 @@ class Camera(pygame.sprite.Group):
             if sprite.should_draw and sprite.image != None and self.internal_rect.move(self.pos[0], self.pos[1]).colliderect(sprite.rect):
                 offset = pygame.math.Vector2(self.pos[0] * sprite.scroll_factor[0], self.pos[1] * sprite.scroll_factor[1])
                 self.internal_surf.blit(sprite.image, sprite.rect.topleft - offset)
+                #sprite.update_image()
 
         # fader
         if self.fade_alpha != 0 or self.fade_speed != 0:

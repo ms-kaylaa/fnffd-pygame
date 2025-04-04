@@ -48,7 +48,7 @@ class W3Stage(BaseStage):
         self.tvshade = StaticSprite(self.tvs.x, self.tvs.y+3, loader.load_image(f"{self.wd}buddyback_2"))
         self.tvshade.scroll_factor = self.tvs.scroll_factor
         self.tvshade.color = (0,0,0,128)
-        self.tvshade.update_image(True)
+        self.tvshade.update_image()
 
         self.fore = StaticSprite(100, -40, loader.load_image(f"{self.wd}buddyback"))
         self.fore.shaders = ["silhouette"]
@@ -72,4 +72,4 @@ class W3Stage(BaseStage):
         self.colorfrom = self.colorfrom.lerp(self.colorto, 0.1)
         self.tvback.color = self.colorfrom
         #print(self.colorfrom)
-        self.tvback.update_image(True)
+        self.tvback.update_image()

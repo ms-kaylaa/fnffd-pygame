@@ -61,6 +61,7 @@ conductor:Conductor = None
 last_beat = -1
 beat_hit_zoom_interval, beat_hit_zoom_amount, beat_hit_character_idle_interval = 0, 0, 0
 
+songlength = None
 songlong = None
 songbeat = None
 
@@ -180,7 +181,7 @@ def execute_special_note(note_type, player_note):
 
 
 def init():
-    global dude, badguy, lady, songlong, songbeat, notes, vidsprite
+    global dude, badguy, lady, songlong, songbeat, notes, vidsprite, songlength
     dude = Character.load_from_json("dude")
     dude.x, dude.y = 525, 290
     dude.xx, dude.yy = 525, 290
@@ -200,9 +201,9 @@ def init():
     colorgo2 = (75/70/255, 46/70/255, 112/70/255, 0.41)
     dude.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [32/255,30/255,40/255]})
     dude.shaders_uniforms.append({"shadowColor": colorgo2, "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
-    dude.shaders_uniforms.append({"shadowColor": (0,0,0,0.34), "shadowOffset": getDOffset, "ignoreRGB": [1,1,1]})
+    dude.shaders_uniforms.append({"shadowColor": (0,0,0,0.34), "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
 
-    badguy.shaders = dude.shaders
+    badguy.shaders = dude.shaders.copy()
     badguy.colorignorelist.append((255,255,255,255))
     #badguy.color = dude.color
     def getBOffset():
@@ -214,7 +215,7 @@ def init():
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
 
-    lady.shaders = dude.shaders
+    lady.shaders = dude.shaders.copy()
     lady.color = dude.color
     def getLOffset():
         return [0, (1/lady.image.get_height())*7]
@@ -222,6 +223,9 @@ def init():
     lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
     lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
     lady.update_image(True)
+
+    dude.shaders.append("highlight")
+    dude.shaders_uniforms.append({"toHighlight": [32/255, 30/255, 40/255], "highlightWith": [1,1,1]})
 
     global bar
     bar = HealthBar()
@@ -242,6 +246,8 @@ def init():
 
     pygame.mixer.music.load(MUS_DIRECTORY + song + ".ogg")
     song_sound = pygame.mixer.Sound(MUS_DIRECTORY + song + ".ogg")
+
+    songlength = song_sound.get_length()
 
     # var songlong=round(((audio_sound_length(obj_song.song)/60)*obj_song.bpm*4));
     songlong = round((song_sound.get_length()/60)*bpm*4)
@@ -580,10 +586,10 @@ def run():
                                 badguy.play_animation(anim)
                                 continue
                 elif note.rect.bottom < -60 and note.solid:
-                    print("dats offscreen")
-                    bar.misses += 1
                     note.kill()
                     note_list.remove(note)
+                    if note_list == player_notes: # make sure you dont get dinged for the opponent missing
+                        bar.misses += 1
 
         fps_str = f"FPS: {int(clock.get_fps())}"
         
@@ -597,3 +603,8 @@ def run():
         globals.screen_shader.render()
 
         pygame.display.flip()
+
+        if pygame.mixer.music.get_pos() >= songlength*1000:
+            pygame.mixer.music.stop()
+            globals.gamestate = "freeplay"
+            return

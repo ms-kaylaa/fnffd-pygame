@@ -22,7 +22,7 @@ class UINote(AnimatedSprite):
         self.alpha_timer = 6
         self.alpha = 128
         self.color = (128,128,128,255)
-        self.update_image(True)
+        self.update_image()
 
     def update(self, dt):
         if self.alpha_timer > 0:

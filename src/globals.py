@@ -16,6 +16,7 @@ pygame.mixer.init()
 pygame.freetype.init()
 
 opengl_screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.OPENGL | pygame.DOUBLEBUF)
+pygame.display.set_caption("FNF FREE DOWNLOAD")
 screen = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
 screen_shader = pygame_shaders.DefaultScreenShader(screen)
 clock = pygame.time.Clock()
@@ -33,6 +34,9 @@ options = {
 
     "bind_select": pygame.K_RETURN,
     "bind_back": pygame.K_ESCAPE
+}
+scores = {
+    "mus_w3s2_old": [-50, 2]
 }
 
 # -= game vars -= #

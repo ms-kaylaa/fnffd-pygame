@@ -29,6 +29,7 @@ class BasicSprite(pygame.sprite.Sprite):
         self._last_alpha = -1
         self._last_angle = -1
         self._last_scale = -1
+        self._last_color = (255,255,255,255)
 
         self.parent: pygame.sprite.Group = None
 
@@ -42,25 +43,32 @@ class BasicSprite(pygame.sprite.Sprite):
     def set_image(self, img: pygame.Surface):
         self.base_image = img
         self.rect = self.base_image.get_rect()
-        self.update_image(True)
+        self.image = None
+        self.update_image()
         
     def update_image(self, force=False):
-        if self.parent != None and not self.rect.colliderect(self.parent.internal_rect):
-            return
-        frame_refresh = False
+        # this could be HUGE for optimization but i need to figure it out some more
+        this_sprite_offscreen = self.parent != None and not self.rect.colliderect(self.parent.internal_rect.scale_by(1.2,1.2).move(-self.parent.internal_rect.width*0.2,-self.parent.internal_rect.height*0.2))
+        
+        
+        if force: print("im being forced to update! HEEELP!!!")
 
-        if self.image == None or (self._last_alpha != self.alpha or self._last_angle != self.angle or self._last_scale != self.scale) or force:
+        frame_refresh = False
+        if self.image == None or ((not this_sprite_offscreen) and (self._last_alpha != self.alpha or self._last_angle != self.angle or self._last_scale != self.scale or self._last_color != self.color)) or force:
             self.image = self.base_image.copy()
             frame_refresh = True
 
         if (frame_refresh and self._last_scale != self.scale) or force:
             self.image = pygame.transform.scale_by(self.base_image, self.scale)
+            self._last_scale = self.scale
         if (frame_refresh and self._last_angle != self.angle) or force:
             self.image = pygame.transform.rotate(self.image, self.angle)
+            self._last_angle = self.angle
         if (frame_refresh and (self.image.get_alpha() != self.alpha or self._last_alpha != self.alpha)) or force:
             self.image.set_alpha(self.alpha)
+            self._last_alpha = self.alpha
         
-        if (self.color != (255, 255, 255, 255) and self.color != (255,255,255) and frame_refresh) or force:
+        if (frame_refresh and (self.color != (255, 255, 255, 255) and self.color != (255,255,255))) or force:
             if len(self.colorignorelist) != 0:
                 # MASK BECAUSE IM STUPID
                 masksurf = self.image.copy()
@@ -72,9 +80,9 @@ class BasicSprite(pygame.sprite.Sprite):
                 self.image.blit(color_surf, special_flags=pygame.BLEND_MULT)
             else:
                 self.image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
+            self._last_color = self.color
 
-
-        if self.shaders != None and frame_refresh and globals.options["shaders_enabled"]:
+        if frame_refresh and self.shaders != None and globals.options["shaders_enabled"]:
             if len(self.shaders) != len(self._last_shaders):
                 if len(self.shaders) > len(self._last_shaders):
                     # new shaders have been added
@@ -98,15 +106,11 @@ class BasicSprite(pygame.sprite.Sprite):
                 self.image = obj.render()
                 i += 1
 
-        self._last_alpha = self.alpha
-        self._last_angle = self.angle
-        self._last_scale = self.scale
-
         self.update_rect()
 
     def update_rect(self):
         self.rect.topleft = (self.x, self.y)
 
     def update(self, dt):
-        self.update_image(True)
+        self.update_image()
         self.update_rect()

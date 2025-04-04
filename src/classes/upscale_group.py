@@ -19,6 +19,7 @@ class UpscaleGroup(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key=bydepth):
             if sprite.should_draw and sprite.rect.colliderect(self.internal_rect) and sprite.image != None:
                 self.internal_surf.blit(sprite.image, sprite.rect.topleft)
+                sprite.update_image()
 
         # 2x upscale like free download does
         scaled_surf = pygame.transform.scale_by(self.internal_surf, 2)

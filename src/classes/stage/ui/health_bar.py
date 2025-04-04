@@ -47,8 +47,8 @@ class HealthBar(BasicSprite):
         self.sinny = round(math.sin(pygame.time.get_ticks()/200))
         self._last_sinny = 0
         
-        self.shaders = ["fancysilhouette"]
-        self.shaders_uniforms = [{"shadowOffset": (-2/self.base_image.get_width(), 2/self.base_image.get_height()), "shadowColor": (0, 0, 0, 1)}]
+        #self.shaders = ["fancysilhouette"]
+        #self.shaders_uniforms = [{"shadowOffset": (-2/self.base_image.get_width(), 2/self.base_image.get_height()), "shadowColor": (0, 0, 0, 1)}]
 
         self.y = 400-self.base_image.get_height()
         self.make_bar()
@@ -103,6 +103,15 @@ class HealthBar(BasicSprite):
         player_icon = self.player_icons[bh]
         self.base_image.blit(player_icon, pygame.Rect((((61+20)+self.skill*0.01*278)-(20), (360+6-335)-(23)), (player_icon.get_width(), player_icon.get_height())))
 
+        # budget shadow
+        shadblit = self.base_image.copy()
+        shadblit.fill((0,0,0), special_flags=pygame.BLEND_RGBA_MULT)
+        shadblit.scroll(2,2)
+
+        shadblit.blit(self.base_image, (0,0))
+        self.base_image = shadblit
+        
+
     def update(self, dt):
         self.sinny = round(math.sin(pygame.time.get_ticks()/200))
 
@@ -115,7 +124,8 @@ class HealthBar(BasicSprite):
 
         if sin_diff or skill_diff or flow_diff or miss_diff or score_diff:
             self.make_bar()
-            self.update_image(True)
+            self.image = None
+            self.update_image()
 
         self._last_sinny = self.sinny
         self._last_skill = self.skill

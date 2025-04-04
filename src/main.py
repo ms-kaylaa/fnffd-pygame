@@ -24,12 +24,12 @@ def run_state_machine():
             state.init()
             last_gamestate = globals.gamestate
         
-        try:
-            state.run()
-        except Exception as e:
-            print(e)
-            import sys
-            sys.exit(1)
+        #try:
+        state.run()
+        #except Exception as e:
+        #    print(e)
+        #    import sys
+        #    sys.exit(1)
 
     pygame.quit()
 
