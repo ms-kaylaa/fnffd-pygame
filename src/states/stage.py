@@ -230,6 +230,21 @@ def init():
     global bar
     bar = HealthBar()
 
+    global player_notes, player_ui_notes, badguy_notes, badguy_ui_notes, pressed_keys, notes, last_beat
+
+    last_beat = 0
+
+    player_ui_notes = []
+    badguy_ui_notes = []
+
+    player_notes = []
+    badguy_notes = []
+
+    notes = []
+
+    # input
+    pressed_keys = [False, False, False, False]
+
     song = "mus_w3s2-old"
 
     global conductor
@@ -378,7 +393,7 @@ def init():
     video_start_time = -1
 
 def run():
-    global enter_pressed, b_pressed, paused, last_beat, last_fps_str, fps_surf, evil_fps_surf, notes, badguy_notes, badguy_ui_notes, player_notes, player_ui_notes
+    global enter_pressed, b_pressed, paused, last_beat, last_fps_str, fps_surf, evil_fps_surf, notes, badguy_notes, badguy_ui_notes, player_notes, player_ui_notes, conductor
     while True:
         dt = (clock.tick(FPS) / 1000) * FPS # get delta time
         for event in pygame.event.get():
@@ -604,7 +619,7 @@ def run():
 
         pygame.display.flip()
 
-        if pygame.mixer.music.get_pos() >= songlength*1000:
+        if not (pygame.mixer.music.get_busy() or paused):
             pygame.mixer.music.stop()
             globals.gamestate = "freeplay"
             return

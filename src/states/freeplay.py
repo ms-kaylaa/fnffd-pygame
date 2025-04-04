@@ -238,7 +238,7 @@ def run():
             iconymods[cursel] = -65
             enter_pressed = True
             selected = True
-            pygame.mixer.music.stop()
+            pygame.mixer.music.fadeout(400)
             
             def upd():
                 global possurf

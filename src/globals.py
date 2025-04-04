@@ -42,6 +42,7 @@ scores = {
 # -= game vars -= #
 small_font = pygame.font.Font("assets/fnt/fnt-comic1.ttf", 14)
 gamestate = "freeplay"
+volume = 1
 
 # -= DIRECTORIES =- #
 
