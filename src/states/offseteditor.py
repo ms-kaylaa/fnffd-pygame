@@ -152,28 +152,28 @@ def run():
 
         if keys[pygame.K_j] and not ofs_left_pressed:
             ofs_left_pressed = True
-            char.animations[anims[curanim]]["offsets"] = [ofsx-speed*dt,ofsy]
+            char.animations[anims[curanim]]["offsets"] = [round(ofsx-speed*dt),ofsy]
             ofsx, ofsy = update_ofs()
         elif not keys[pygame.K_j]:
             ofs_left_pressed = False
 
         if keys[pygame.K_l] and not ofs_right_pressed:
             ofs_right_pressed = True
-            char.animations[anims[curanim]]["offsets"] = [ofsx+speed*dt,ofsy]
+            char.animations[anims[curanim]]["offsets"] = [round(ofsx+speed*dt),ofsy]
             ofsx, ofsy = update_ofs()
         elif not keys[pygame.K_l]:
             ofs_right_pressed = False
 
         if keys[pygame.K_i] and not ofs_up_pressed:
             ofs_up_pressed = True
-            char.animations[anims[curanim]]["offsets"] = [ofsx,ofsy-speed*dt]
+            char.animations[anims[curanim]]["offsets"] = [ofsx,round(ofsy-speed*dt)]
             ofsx, ofsy = update_ofs()
         elif not keys[pygame.K_i]:
             ofs_up_pressed = False
 
         if keys[pygame.K_k] and not ofs_down_pressed:
             ofs_down_pressed = True
-            char.animations[anims[curanim]]["offsets"] = [ofsx,ofsy+speed*dt]
+            char.animations[anims[curanim]]["offsets"] = [ofsx,round(ofsy+speed*dt)]
             ofsx, ofsy = update_ofs()
         elif not keys[pygame.K_k]:
             ofs_down_pressed = False
