@@ -4,7 +4,7 @@
         "idle": {
             "xml_name": "cyan idle",
             "offsets": [
-                -0.17999999999999927,
+                0,
                 0
             ],
             "indices": []
@@ -12,32 +12,32 @@
         "singLEFT": {
             "xml_name": "cyan left",
             "offsets": [
-                -8.819999999999999,
-                20.879999999999995
+                -9,
+                21
             ],
             "indices": []
         },
         "singDOWN": {
             "xml_name": "cyan down",
             "offsets": [
-                -48.959999999999994,
-                43.019999999999996
+                -49,
+                43
             ],
             "indices": []
         },
         "singUP": {
             "xml_name": "cyan up",
             "offsets": [
-                -18.36,
-                -6.12
+                -18,
+                -6
             ],
             "indices": []
         },
         "singRIGHT": {
             "xml_name": "cyan right",
             "offsets": [
-                -4.319999999999999,
-                0.0
+                -4,
+                0
             ],
             "indices": []
         },
@@ -52,16 +52,16 @@
         "singDOWN-alt": {
             "xml_name": "cyan down alt",
             "offsets": [
-                3.06,
-                8.82
+                3,
+                9
             ],
             "indices": []
         },
         "singUP-alt": {
             "xml_name": "cyan up alt",
             "offsets": [
-                -2.88,
-                -8.64
+                -3,
+                -9
             ],
             "indices": []
         },
@@ -76,24 +76,24 @@
         "ayy": {
             "xml_name": "cyan ayy",
             "offsets": [
-                3.06,
-                14.76
+                3,
+                15
             ],
             "indices": []
         },
         "snore up": {
             "xml_name": "cyan snore up",
             "offsets": [
-                -12.24,
-                15.480000000000002
+                -12,
+                15
             ],
             "indices": []
         },
         "snore down": {
             "xml_name": "cyan snore down",
             "offsets": [
-                -12.239999999999998,
-                18.36
+                -12,
+                18
             ],
             "indices": []
         }
