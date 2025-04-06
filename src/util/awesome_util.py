@@ -4,12 +4,16 @@ import globals
 
 def lerp(a, b, f):
     '''
-    "LERP IT!" -gunk, probably
+    "LERP IT!" -gunk, probably\n
+    just use pygame.math.lerp
     '''
     return pygame.math.lerp(a, b, f)
 
 def clamp(val, low, high):
-    return max(low, min(val, high))
+    '''
+    just use pygame.math.clamp
+    '''
+    return pygame.math.clamp(val, low, high)
 
 def play_snd(file:str):
     """

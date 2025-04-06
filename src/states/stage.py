@@ -383,7 +383,6 @@ def init():
     paused = False
 
     pygame.mixer.music.play()
-    pygame.mixer.music.set_volume(0.75)
     
     global event_hit
     event_hit = False

@@ -1,7 +1,7 @@
 import pygame, pyautogui, os, shutil
 
 import globals
-from globals import clock, screen, FPS, MUS_DIRECTORY
+from globals import clock, screen, FPS
 
 from classes.stage.character import Character
 from classes.upscale_group import UpscaleGroup
