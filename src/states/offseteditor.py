@@ -1,4 +1,4 @@
-import pygame, pyautogui, os, shutil
+import pygame, pymsgbox, os, shutil
 
 import globals
 from globals import clock, screen, FPS
@@ -32,9 +32,9 @@ cam_x,cam_y = -200,-400
 def init():
     global grp,backsprite,char,cross,curanim,anims,ghostchar,tutorialtext,charname
 
-    charname = pyautogui.prompt(text="gimme character name",title="")
+    charname = pymsgbox.prompt(text="gimme character name",title="")
     if not os.path.exists(globals.CHR_DIRECTORY+charname+".json"):
-        pyautogui.alert("character doesnt exist! creating it now")
+        pymsgbox.alert("character doesnt exist! creating it now")
         shutil.copy2(globals.CHR_DIRECTORY+"default.json",globals.CHR_DIRECTORY+charname+".json")
 
     grp = Camera()
