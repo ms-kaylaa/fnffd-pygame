@@ -9,7 +9,7 @@ uniform vec4 shadowColor;
 
 uniform vec3 ignoreRGB;
 
-bool dropshadow = true; // mimic the 2-draw-call effect from free download... looks kinda bad cause frame widths get in the way but its an option regardless
+bool dropshadow = false; // mimic the 2-draw-call effect from free download... looks kinda bad cause frame widths get in the way but its an option regardless
 
 void main() {
     vec4 defColor = texture(image, fragmentTexCoord);

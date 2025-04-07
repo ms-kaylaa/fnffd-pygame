@@ -176,7 +176,6 @@ def execute_special_note(note_type, player_note):
             print("starting video")
             video_start_time = pygame.mixer.music.get_pos() / 1000
             vidsprite.video.toggle_pause()
-            vidsprite.video.seek(0.15)
             event_hit = True
 
 
@@ -513,10 +512,11 @@ def run():
         if globals.HAS_FFMPEG and event_hit:
             vidsprite.update(dt)
             # make sure we still have ffmpeg (itll be invalidated in update if we dont) before going any further
-            if globals.HAS_FFMPEG:
+            if globals.HAS_FFMPEG and not vidsprite.video.buffering:
                 relative_time = (pygame.mixer.music.get_pos()/1000 - video_start_time) #+ 0.15
                 if abs(vidsprite.video.get_pos() - relative_time) > 0.15:
                     vidsprite.video.seek(relative_time, False) 
+                    print("im seeking... ahhh!!!!")
                 screen.blit(vidsprite.image, vidsprite.rect) 
         
 

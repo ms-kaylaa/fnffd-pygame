@@ -52,10 +52,10 @@ iconstart_y = 0
 weekndlist = [
     "weeknd 7 billion", # yolo man
 
-    "BONUS | weeknd 4",
-    "BONUS | weeknd 3",
-    "BONUS | weeknd 2",
-    "BONUS | weeknd 1",
+    "BONUS (weeknd 4)",
+    "BONUS (weeknd 3)",
+    "BONUS (weeknd 2)",
+    "BONUS (weeknd 1)",
 
     "tutorial",
     "weeknd 1",
@@ -72,10 +72,10 @@ songlist = [
 
     [-4, "cinemassacre"], # i havent added these yet.. i might never!
     [-3, "break it down triangle man"],
-    [-2, "channelsurfing and nermal"],
+    [-2, "channelsurfing & nermal"],
     [-1, "infographic"],
 
-    [0, "i robot"],
+    [0, "i, robot"],
     
     [1, "summer"],
     [1, "stars"],
@@ -89,7 +89,7 @@ songlist = [
     [4, "satellite"],
     [4, "starfire"],
 
-    [5, "tsunami old", -1]
+    [5, "tsunami (old)", -1]
 ]
 layout=".....|.........|."
 cursel = 0
@@ -154,8 +154,11 @@ def init():
     load_icons()
     
     grp = UpscaleGroup()
+    grp.depthsort = True
 
     backsprite = StaticSprite(0,0,load_image("menus/back_gray"))
+    backsprite.base_image = pygame.transform.scale_by(backsprite.base_image, 2)
+    #backsprite.update_image(True)
 
     layersurf = pygame.Surface((400, 400))
     layersurf.fill(backsprite.color)
@@ -268,6 +271,8 @@ def run():
             nine_pressed = False
 
         iconxshift = lerp(iconxshift, targxshift, 0.15)
+        backsprite.x = iconxshift/9
+        backsprite.update_rect()
         for i in range(len(iconsprites)):
             sprite = iconsprites[i]
             startx = iconxstarts[i]
