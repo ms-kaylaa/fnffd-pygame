@@ -56,6 +56,9 @@ evil_fps_surf: pygame.Surface = None
 # STUPID
 vidsprite:VideoSprite = None
 
+prebuffer_window = 2.0  # seconds
+video_buffer_start = -1
+
 # beat stuff
 conductor:Conductor = None
 last_beat = -1
@@ -175,12 +178,13 @@ def execute_special_note(note_type, player_note):
         case 13:
             print("starting video")
             video_start_time = pygame.mixer.music.get_pos() / 1000
+            
             vidsprite.video.toggle_pause()
             event_hit = True
 
 
 def init():
-    global dude, badguy, lady, songlong, songbeat, notes, vidsprite, songlength
+    global dude, badguy, lady, songlong, songbeat, notes, vidsprite, songlength, video_buffer_start
     dude = Character.load_from_json("dude")
     dude.x, dude.y = 525, 290
     dude.xx, dude.yy = 525, 290
@@ -341,7 +345,8 @@ def init():
     vidsprite.rect.topleft = (0, 0)
     vidsprite.scale = 800/vidsprite.video.current_size[0]
     vidsprite.video.play()
-    vidsprite.video.toggle_pause()
+    video_buffer_start = pygame.time.get_ticks() / 1000  # real time, not music time
+
 
     # stagehand LITE!
     global beat_hit_zoom_interval, beat_hit_zoom_amount, beat_hit_character_idle_interval
@@ -513,11 +518,17 @@ def run():
             vidsprite.update(dt)
             # make sure we still have ffmpeg (itll be invalidated in update if we dont) before going any further
             if globals.HAS_FFMPEG and not vidsprite.video.buffering:
-                relative_time = (pygame.mixer.music.get_pos()/1000 - video_start_time) #+ 0.15
+                relative_time = (pygame.mixer.music.get_pos() / 1000 - video_start_time)
                 if abs(vidsprite.video.get_pos() - relative_time) > 0.15:
-                    vidsprite.video.seek(relative_time, False) 
+                    vidsprite.video.seek(relative_time, False)
                     print("im seeking... ahhh!!!!")
                 screen.blit(vidsprite.image, vidsprite.rect) 
+        elif globals.HAS_FFMPEG and not vidsprite.video.paused:
+            current_real_time = pygame.time.get_ticks() / 1000
+            if current_real_time - video_buffer_start >= prebuffer_window:
+                vidsprite.video.toggle_pause()
+                print("stopped prebuffer")
+
         
 
         ui_group.draw(screen)
