@@ -4,36 +4,27 @@ import globals
 from globals import screen, FPS, small_font, MUS_DIRECTORY, clock
 
 from classes.upscale_group import UpscaleGroup
-from classes.sprites.static_sprite import StaticSprite
 
 from util.conductor import Conductor
 
-textsprites:list[StaticSprite] = []
-textspriteyshift = 0
-grp:UpscaleGroup = None
+texts:list[pygame.Surface] = []
 
 conductor:Conductor = None
 last_beat = -1
 
-
 def init():
-    global last_beat, conductor, textsprites, grp
+    global last_beat, conductor, texts
     last_beat = -1
-
-    grp = UpscaleGroup()
 
     conductor = Conductor()
     conductor.bpm = 115
-
-    textsprites = []
-    grp.add(textsprites)
 
     pygame.mixer.music.load(MUS_DIRECTORY + "mus_game.ogg")
     pygame.mixer.music.play(-1)
     pass
 
 def run():
-    global last_beat, conductor, grp
+    global last_beat, conductor,texts
     while globals.gamestate == "bwords":
         dt = (clock.tick(FPS) / 1000) * FPS # get delta time
         screen.fill((0,0,0))
@@ -44,79 +35,61 @@ def run():
                 return
         keys = pygame.key.get_pressed()
 
+        if keys[pygame.K_RETURN]:
+            pygame.mixer.music.set_pos(8.35)
+            globals.gamestate = "freeplay"
+
         conductor.time = pygame.mixer.music.get_pos()/1000
         if conductor.beat > last_beat:
             last_beat = conductor.beat
             handle_beatstep()
             print("beat hit")
 
-        grp.update(dt)
-        grp.draw(screen)
+        for text in texts:
+            screen.blit(text[0],text[1])
 
         globals.screen_shader.render()
         pygame.display.flip()
 
 def handle_beatstep():
-    # bad function name but whatever
-    # this entire function fucking sucks
-    global grp, textsprites, textspriteyshift
-    changed_textsprites = True
     match conductor.beat:
         case 0:
-            make_textsprite(["FREE DOWNLOAD BY"])
+            draw_text("FREE DOWNLOAD BY")
         case 2:
-            make_textsprite(["TYLER_MON & FUNNE"])
-
+            draw_text("TYLER_MON & FUNNE",1)
         case 4:
-            textsprites.clear()
-            textspriteyshift = -50
-            make_textsprite(["PORTED TO"])
+            texts.clear()
+            draw_text("PORTED TO")
         case 6:
-            make_textsprite(["PYGAME BY"])
+            draw_text("PYGAME BY",1)
         case 7:
-            make_textsprite(["KAYLA"])
+            draw_text("KAYLA",2)
+            # i'm not making a function for this
+            newtext = small_font.render("with contributions from hexose :]", False, (255,255,255))
+            newtext = pygame.transform.scale_by(newtext, 2)
+            rect = newtext.get_rect(center=(400,600))
+            texts.append([newtext,rect])
         case 8:
-            textsprites.clear()
-            textspriteyshift = 0
-            make_textsprite(["like this"])
+            texts.clear()
+            draw_text("like this")
         case 10:
-            make_textsprite(["like this"])
+            draw_text("like this",1)
         case 12:
-            textsprites.clear()
-            textspriteyshift = -50
-            make_textsprite(["FNF"])
+            texts.clear()
+            draw_text("FNF")
         case 13:
-            make_textsprite(["FREE"])
+            draw_text("FREE",1)
         case 14:
-            make_textsprite(["DOWNLOAD"])
+            draw_text("DOWNLOAD",2)
         case 15:
-            make_textsprite(["PYGAME PORT"])
+            draw_text("PYGAME PORT",3)
         case 16:
             globals.gamestate = "freeplay"
         
-        case _:
-            changed_textsprites = False
-
-    if changed_textsprites:
-        grp.empty()
-        grp.add(textsprites)
-
-    
-
-def make_textsprite(lines = ["I ERRORS..."]):
-    global textsprites, grp
-
-    fontheight = small_font.get_height()*2
-    linebuf = 30*2
-    # int totalHeight = fm.getHeight() * lines.length + (lineBufferHeight*lines.length-1);
-    totalheight = fontheight*(len(lines)+len(textsprites))+(linebuf*(len(lines)+len(textsprites)))
-    for i in range(len(textsprites), len(lines)+len(textsprites)):
-        line = lines[i-len(textsprites)]
-
-        textsurf = pygame.transform.scale_by(small_font.render(line, False, (255,255,255)), 2)
-        # this fucking sucks
-        textsprite = StaticSprite(200-textsurf.width/2, 200-(((totalheight/2)/(len(lines)+len(textsprites)))*((len(lines))-(i)))-fontheight/2+textspriteyshift, textsurf)
-        print(textsprite.x, textsprite.y)
-
-        textsprites.append(textsprite)
-        #print("made textsprite")
+def draw_text(txt = "I ERRORS...",y=0):
+    # i dont know if this is better or worse!
+    global texts
+    newtext = small_font.render(txt, False, (255,255,255))
+    newtext = pygame.transform.scale_by(newtext, 4)
+    rect = newtext.get_rect(center=(400,280+70*y))
+    texts.append([newtext,rect])

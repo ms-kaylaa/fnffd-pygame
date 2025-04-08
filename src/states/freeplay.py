@@ -209,7 +209,7 @@ def run():
     global iconsprites, iconxshift, selected, infocard, discsprite, fader, backsprite, layersprite, possurf
     discstarts = [discsprite.x, discsprite.y]
 
-    left_pressed, right_pressed, enter_pressed, nine_pressed = False, False, False, False
+    left_pressed, right_pressed, enter_pressed, nine_pressed = False, False, True, False
 
     global moveon
     moveon = False # should be true. im looking at you free download community
