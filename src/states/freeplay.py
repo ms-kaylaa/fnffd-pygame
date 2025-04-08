@@ -201,8 +201,9 @@ def init():
     change_selection(5 if cursel == 0 else 0)
     iconxshift = targxshift
 
-    pygame.mixer.music.load(MUS_DIRECTORY + "mus_game.ogg")
-    pygame.mixer.music.play(-1)
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.load(MUS_DIRECTORY + "mus_game.ogg")
+        pygame.mixer.music.play(-1)
 
 def run():
     global iconsprites, iconxshift, selected, infocard, discsprite, fader, backsprite, layersprite, possurf

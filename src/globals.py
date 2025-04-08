@@ -42,7 +42,7 @@ scores = {
 # -= game vars -= #
 small_font = pygame.font.Font("assets/fnt/fnt-comic1.ttf", 8)
 default_font = pygame.font.Font(None, 25)
-gamestate = "freeplay"
+gamestate = "bwords"
 volume = 1
 
 # -= DIRECTORIES =- #
