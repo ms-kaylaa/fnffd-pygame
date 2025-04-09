@@ -148,6 +148,7 @@ def execute_special_note(note_type, player_note):
         case 10:
             # todo: scalability
             global beat_hit_zoom_amount, beat_hit_zoom_interval
+            print(f"this is event num {event_num}!")
             match event_num:
                 case 0:
                     targ_cam_zoom = 1.4
@@ -170,6 +171,13 @@ def execute_special_note(note_type, player_note):
                     grp.fade_speed = -10
                     beat_hit_zoom_amount = .06
                     beat_hit_zoom_interval = 1
+                case 4:
+                    grp.fade_alpha = 0
+                    grp.fade_color = (0,0,0)
+                    grp.fade_speed = 7
+                case 5:
+                    grp.fade_alpha = 255
+                    grp.fade_speed = -7
 
             event_num += 1
 

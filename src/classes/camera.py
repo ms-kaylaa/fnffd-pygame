@@ -33,7 +33,6 @@ class Camera(pygame.sprite.Group):
 
         # fader
         if self.fade_alpha != 0 or self.fade_speed != 0:
-            self.fade_alpha = awesome_util.clamp(self.fade_alpha + self.fade_speed, 0, 255)
             self.fade_surf.fill(self.fade_color)
             self.fade_surf.set_alpha(self.fade_alpha)
             self.internal_surf.blit(self.fade_surf, self.fade_surf.get_rect())
@@ -50,6 +49,7 @@ class Camera(pygame.sprite.Group):
         surf.blit(scaled_surf, (scaled_rect.x, scaled_rect.y))
 
     def update(self, *args, **kwargs):
+        self.fade_alpha = awesome_util.clamp(self.fade_alpha + self.fade_speed*args[0], 0, 255)
         for sprite in self.sprites():
             if sprite.should_update:
                 sprite.update(*args)
