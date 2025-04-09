@@ -15,3 +15,14 @@ this  port  will  explode--in  10  seconds
 open  source--peep  the  github
 john  pygame--you  are  on  my  kill  list
 they  call  me  mario--the  way  i'm  a  bro
+if  true  then--false
+proudly  featuring--umm...
+characterscript--20k  lines
+ph!getfile--kevin.png
+#  EAT  SHIT--HEXOSE
+check  out--love2d  port
+check  out  java  edition--if  you  like  bad  ports
+hawk  tuah--bracken  arm
+if  crouch  and  not  sliding  then--v1056  =  1;
+v406.Name  ==  "honey"  then--rg3[#rg3 + 1]  =  v406;
+if  success  then--print("happy  days")

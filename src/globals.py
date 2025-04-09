@@ -1,6 +1,8 @@
 import pygame, pygame.mixer, pygame.freetype
 import pygame_shaders
 
+import pypresence
+
 # -= PYGAME SETUP =- #
 
 # window setup
@@ -8,6 +10,14 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
 
 FPS = 60
+
+# presence!
+client_id = 0 # TODO
+rpc = pypresence.Presence(client_id)
+
+# ensure NO placeholder!
+if client_id != 0:
+    rpc.connect()
 
 # pygame init stuff
 

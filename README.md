@@ -7,6 +7,8 @@ a project started because i was bored in computer science class
 * pyvidplayer2 (+ ffmpeg)
 * pygame_shaders (READ BELOW)
 * tween (it is literally just called tween)
+* requests
+* pypresence
 
 you need a special version of the library 'pygame_shaders', you can find the file i modified using this [pull request link](https://github.com/ScriptLineStudios/pygame_shaders/pull/13) because i doubt its ever gonna be merged
 
