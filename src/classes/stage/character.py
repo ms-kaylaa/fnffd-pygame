@@ -40,6 +40,7 @@ class Character(AnimatedSprite):
 
     def play_animation(self, name):
         if name == "ayy": name = self.ayy_anim
-        super().play_animation(self.animations[name]['xml_name'], self.animations[name]["indices"])
-        self.cur_named_anim = name
-        self.update_rect()
+        if name in self.animations: 
+            super().play_animation(self.animations[name]['xml_name'], self.animations[name]["indices"])
+            self.cur_named_anim = name
+            self.update_rect()

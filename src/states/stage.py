@@ -69,6 +69,7 @@ songlong = None
 songbeat = None
 
 # game stuff
+song = "mus_w3s2-old"
 paused = False
 
 player_ui_notes = []
@@ -149,35 +150,36 @@ def execute_special_note(note_type, player_note):
             # todo: scalability
             global beat_hit_zoom_amount, beat_hit_zoom_interval
             print(f"this is event num {event_num}!")
-            match event_num:
-                case 0:
-                    targ_cam_zoom = 1.4
-                    stage.colorto = (75,46,112,255)
-                case 1:
-                    targ_cam_zoom = 1.15
-                    grp.fade_color = (255, 255, 255)
-                    grp.fade_alpha = 128
-                    grp.fade_speed = -15
+            if song ==  "mus_w3s2-old":
+                match event_num:
+                    case 0:
+                        targ_cam_zoom = 1.4
+                        stage.colorto = (75,46,112,255)
+                    case 1:
+                        targ_cam_zoom = 1.15
+                        grp.fade_color = (255, 255, 255)
+                        grp.fade_alpha = 128
+                        grp.fade_speed = -15
 
-                    #stage.colorto = (0, 0, 255)
+                        #stage.colorto = (0, 0, 255)
 
-                    beat_hit_zoom_amount = .03
-                    beat_hit_zoom_interval = 4
-                case 2:
-                    grp.fade_alpha = 0
-                    grp.fade_speed = 15
-                case 3:
-                    grp.fade_alpha = 255
-                    grp.fade_speed = -10
-                    beat_hit_zoom_amount = .06
-                    beat_hit_zoom_interval = 1
-                case 4:
-                    grp.fade_alpha = 0
-                    grp.fade_color = (0,0,0)
-                    grp.fade_speed = 7
-                case 5:
-                    grp.fade_alpha = 255
-                    grp.fade_speed = -7
+                        beat_hit_zoom_amount = .03
+                        beat_hit_zoom_interval = 4
+                    case 2:
+                        grp.fade_alpha = 0
+                        grp.fade_speed = 15
+                    case 3:
+                        grp.fade_alpha = 255
+                        grp.fade_speed = -10
+                        beat_hit_zoom_amount = .06
+                        beat_hit_zoom_interval = 1
+                    case 4:
+                        grp.fade_alpha = 0
+                        grp.fade_color = (0,0,0)
+                        grp.fade_speed = 7
+                    case 5:
+                        grp.fade_alpha = 255
+                        grp.fade_speed = -7
 
             event_num += 1
 
@@ -202,41 +204,10 @@ def init():
     badguy.x, badguy.y = 280, 290
     badguy.xx, badguy.yy = badguy.x, badguy.y
     badguy.play_animation("idle")
-
-    dude.shaders.append("silhouette")
-    dude.shaders.append("shadow")
-    dude.shaders.append("shadow")
-    #dude.color = (128, 255, 128, 255)
-    def getDOffset():
-        return [-(1/dude.image.get_width())*4, (1/dude.image.get_height())*4]
-    colorgo2 = (75/70/255, 46/70/255, 112/70/255, 0.41)
-    dude.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [32/255,30/255,40/255]})
-    dude.shaders_uniforms.append({"shadowColor": colorgo2, "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
-    dude.shaders_uniforms.append({"shadowColor": (0,0,0,0.34), "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
-
-    badguy.shaders = dude.shaders.copy()
-    badguy.colorignorelist.append((255,255,255,255))
-    #badguy.color = dude.color
-    def getBOffset():
-        return [(1/badguy.image.get_width())*4, (1/badguy.image.get_height())*4]
-    badguy.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
-    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
-    badguy.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
+ 
 
     lady = StaticSprite(340, 275, loader.load_image("stage_assets/ladycutout.png")) # thanks avery
     lady.y -= lady.base_image.get_height()
-
-    lady.shaders = dude.shaders.copy()
-    lady.color = dude.color
-    def getLOffset():
-        return [0, (1/lady.image.get_height())*7]
-    lady.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
-    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
-    lady.shaders_uniforms.append({"shadowColor": dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
-    lady.update_image(True)
-
-    dude.shaders.append("highlight")
-    dude.shaders_uniforms.append({"toHighlight": [32/255, 30/255, 40/255], "highlightWith": [1,1,1]})
 
     global bar
     bar = HealthBar()
@@ -255,8 +226,6 @@ def init():
 
     # input
     pressed_keys = [False, False, False, False]
-
-    song = "mus_w3s2-old"
 
     global conductor
     conductor = Conductor()
@@ -365,11 +334,13 @@ def init():
     bg_group = []
     fg_group = [] # idk if ill use this
 
-    from stages.w3 import W3Stage
     global stage
-    stage = W3Stage()
+    
     match song:
         case 'mus_w3s2-old':
+            from stages.w3 import W3Stage
+            stage = W3Stage()
+
             badguy.x = 185
             badguy.y = 320 + dude.base_image.get_height()
 
@@ -403,6 +374,8 @@ def init():
     global video_start_time
     video_start_time = -1
 
+    if stage != None: stage.postcreate()
+
 def run():
     global enter_pressed, b_pressed, paused, last_beat, last_fps_str, fps_surf, evil_fps_surf, notes, badguy_notes, badguy_ui_notes, player_notes, player_ui_notes, conductor
     while True:
@@ -416,7 +389,7 @@ def run():
             
         screen.fill((145, 207, 221))
 
-        stage.update()
+        if stage != None: stage.update()
 
         keys = pygame.key.get_pressed()
 

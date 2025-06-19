@@ -66,16 +66,16 @@ weekndlist = [
     "BONUS" # generic in case i add bonus songs! unlikely
 ]
 
-# STRUCTURE:[weekndid:int (index in weeknds list - 5) title:str, iconoffset:int = 0]
+# STRUCTURE:[weekndid:int (index in weeknds list - 5) title:str, iconoffset:int = 0, filename:str = formatted thingy idk autoformat fuck fuck fuck fuck my life fuck]
 songlist = [
     [-5, "misplaced"],
 
     [-4, "cinemassacre"], # i havent added these yet.. i might never!
-    [-3, "break it down triangle man"],
-    [-2, "channelsurfing & nermal"],
+    [-3, "break it down triangle man", 0, "mus_breakitdown"],
+    [-2, "channelsurfing & nermal", 0, "mus_channelsurf"],
     [-1, "infographic"],
 
-    [0, "i, robot"],
+    [0, "i, robot", 0, "mus_tutorial"],
     
     [1, "summer"],
     [1, "stars"],
@@ -89,7 +89,7 @@ songlist = [
     [4, "satellite"],
     [4, "starfire"],
 
-    [5, "tsunami (old)", -1]
+    [5, "tsunami (old)", -1, "mus_w3s2-old"]
 ]
 layout=".....|.........|."
 cursel = 0
@@ -253,6 +253,13 @@ def run():
             def fade():
                 def trans():
                     global moveon
+                    from states import stage
+                    if len(songlist[cursel]) < 4:
+                        if abs(songlist[cursel][0]) != songlist[cursel][0]:
+                            # we in bonus songs, do the autofill
+                            stage.song = "mus_" + songlist[cursel][1]
+                    else:
+                        stage.song = songlist[cursel][3]
                     globals.gamestate = "stage"
                     moveon = True
                 twn3 = tween.to(fader, "alpha", 255, 0.25, "linear", 0.2)

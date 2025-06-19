@@ -14,3 +14,7 @@ class BaseStage(ABC):
     @abstractmethod
     def update(self):
         pass
+
+    @abstractmethod
+    def postcreate(self):
+        pass

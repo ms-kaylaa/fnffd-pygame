@@ -3,7 +3,7 @@ import pygame
 import cProfile, pstats, os
 
 import threading
-
+import importlib
 
 import globals
 
@@ -14,32 +14,44 @@ from states import freeplay
 from states import offseteditor
 from states import bwords
 
+states_dict = {}
+def load_states(): # adapted from party phil!
+    states_dict.clear()
+    base_path = "src/states"
+    base_prefix = len(base_path) + 1  # get the index where stuff we care about shows up
+    
+    for root, _, files in os.walk(base_path):
+        relative_root = root[base_prefix:].replace(os.sep, ".")  # convert to module path
+        if relative_root.startswith("_") or relative_root.endswith("_"):
+            continue  # skip backend stuff
+        
+        for file in files:
+            if not file.endswith(".py") or file.startswith("_"):
+                continue  # skip backend stuff
+            
+            name = file[:-3]  # remove extension
+            module_path = f"states.{relative_root + '.' if relative_root else ''}{name}"
+            states_dict[name] = importlib.import_module(module_path)
+
+    print("finished loading states")
 
 def get_module_from_state(state):
-    match state:
-        case "stage":
-            return stage
-        case "freeplay":
-            return freeplay
-        case "offseteditor":
-            return offseteditor
-        case "bwords":
-            return bwords
+    return states_dict[state]
         
 def check_vol_binds():
     up_pressed, down_pressed = False, False
     while globals.gamestate != pygame.QUIT:
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_1] and not down_pressed:
+        if keys[pygame.K_MINUS] and not down_pressed:
             globals.volume = pygame.math.clamp(globals.volume - 0.1, 0, 1)
             
             play_snd("snd_ribbit2")
 
             down_pressed = True
-        elif not keys[pygame.K_1]:
+        elif not keys[pygame.K_MINUS]:
             down_pressed = False
 
-        if keys[pygame.K_2] and not up_pressed:
+        if keys[pygame.K_EQUALS] and not up_pressed:
             globalvollast = globals.volume
             globals.volume = pygame.math.clamp(globals.volume + 0.1, 0, 1)
 
@@ -47,7 +59,7 @@ def check_vol_binds():
                 play_snd("snd_ribbit1")
 
             up_pressed = True
-        elif not keys[pygame.K_2]:
+        elif not keys[pygame.K_EQUALS]:
             up_pressed = False
 
         pygame.mixer.music.set_volume(globals.volume)
@@ -56,6 +68,7 @@ def run_state_machine():
     last_gamestate = ""
 
     threading.Thread(target=check_vol_binds).start()
+    load_states()
     
     while globals.gamestate != pygame.QUIT:
         state = get_module_from_state(globals.gamestate)

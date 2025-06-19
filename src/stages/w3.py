@@ -1,4 +1,5 @@
 from stages.base_stage import BaseStage
+from states import stage
 
 import pygame
 import math
@@ -73,3 +74,37 @@ class W3Stage(BaseStage):
         self.tvback.color = self.colorfrom
         #print(self.colorfrom)
         self.tvback.update_image()
+
+
+    def postcreate(self):
+        stage.dude.shaders.append("silhouette")
+        stage.dude.shaders.append("shadow")
+        stage.dude.shaders.append("shadow")
+        #dude.color = (128, 255, 128, 255)
+        def getDOffset():
+            return [-(1/stage.dude.image.get_width())*4, (1/stage.dude.image.get_height())*4]
+        colorgo2 = (75/70/255, 46/70/255, 112/70/255, 0.41)
+        stage.dude.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [32/255,30/255,40/255]})
+        stage.dude.shaders_uniforms.append({"shadowColor": colorgo2, "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
+        stage.dude.shaders_uniforms.append({"shadowColor": (0,0,0,0.34), "shadowOffset": getDOffset, "ignoreRGB": [32/255,30/255,40/255]})
+
+        stage.badguy.shaders = stage.dude.shaders.copy()
+        stage.badguy.colorignorelist.append((255,255,255,255))
+        #badguy.color = dude.color
+        def getBOffset():
+            return [(1/stage.badguy.image.get_width())*4, (1/stage.badguy.image.get_height())*4]
+        stage.badguy.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
+        stage.badguy.shaders_uniforms.append({"shadowColor": stage.dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
+        stage.badguy.shaders_uniforms.append({"shadowColor": stage.dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getBOffset, "ignoreRGB": [1,1,1]})
+
+        stage.lady.shaders = stage.dude.shaders.copy()
+        stage.lady.color = stage.dude.color
+        def getLOffset():
+            return [0, (1/stage.lady.image.get_height())*7]
+        stage.lady.shaders_uniforms.append({"colorreplace": [75/255, 46/255, 112/255, 0.14], "ignoreRGB": [1,1,1]})
+        stage.lady.shaders_uniforms.append({"shadowColor": stage.dude.shaders_uniforms[1]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+        stage.lady.shaders_uniforms.append({"shadowColor": stage.dude.shaders_uniforms[2]["shadowColor"], "shadowOffset": getLOffset, "ignoreRGB": [1,1,1]})
+        stage.lady.update_image(True)
+
+        stage.dude.shaders.append("highlight")
+        stage.dude.shaders_uniforms.append({"toHighlight": [32/255, 30/255, 40/255], "highlightWith": [1,1,1]})

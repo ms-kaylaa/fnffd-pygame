@@ -58,9 +58,6 @@ class BasicSprite(pygame.sprite.Sprite):
             self.image = self.base_image.copy()
             frame_refresh = True
 
-        if (frame_refresh and self._last_scale != self.scale) or force:
-            self.image = pygame.transform.scale_by(self.base_image, self.scale)
-            self._last_scale = self.scale
         if (frame_refresh and self._last_angle != self.angle) or force:
             self.image = pygame.transform.rotate(self.image, self.angle)
             self._last_angle = self.angle
@@ -106,6 +103,9 @@ class BasicSprite(pygame.sprite.Sprite):
                 self.image = obj.render()
                 i += 1
 
+        if (frame_refresh and self._last_scale != self.scale) or force:
+            self.image = pygame.transform.scale_by(self.base_image, self.scale)
+            self._last_scale = self.scale
         self.update_rect()
 
     def update_rect(self):
